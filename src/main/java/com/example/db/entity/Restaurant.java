@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 
 @Table(name = "restaurants")
 @Entity
@@ -27,11 +26,11 @@ public class Restaurant {
     @OneToMany
     private List<Employee> employees;
 
-    @ElementCollection
-    @CollectionTable(name = "product_weight_mapping", joinColumns = {@JoinColumn(name = "restaurant_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "product_name")
-    @Column(name = "weight")
-    private Map<Product, Double> leftProducts;
+//    @ElementCollection
+//    @CollectionTable(name = "product_weight_mapping", joinColumns = {@JoinColumn(name = "restaurant_id", referencedColumnName = "id")})
+//    @MapKeyColumn(name = "product_name")
+//    @Column(name = "weight")
+//    private Map<Product, Double> leftProducts;
 
     @OneToMany
     private List<Dish> menu;
