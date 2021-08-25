@@ -1,7 +1,5 @@
 package com.example.db.entity;
 
-import java.util.HashSet;
-
 public enum Role {
 
     DIRECTOR("DIRECTOR"), //директор Restaurants edit, the rest is read only
