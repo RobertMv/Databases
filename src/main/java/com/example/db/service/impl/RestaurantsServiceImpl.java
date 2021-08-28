@@ -1,8 +1,9 @@
-package com.example.db.service;
+package com.example.db.service.impl;
 
 
 import com.example.db.entity.Restaurant;
 import com.example.db.repository.RestaurantsRepository;
+import com.example.db.service.RestaurantsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +30,21 @@ public class RestaurantsServiceImpl implements RestaurantsService {
     }
 
     @Override
-    public Optional<Restaurant> getRestaurant(String city) {
-        return restaurantsRepository.findByCity(city);
+    public Restaurant getRestaurant(String city) {
+        Optional<Restaurant> restaurant = restaurantsRepository.findByCity(city);
+        return restaurant.orElseGet(restaurant::orElseThrow);
+    }
+
+    @Override
+    public Restaurant getRestaurantWithMaxMonthProfit() {
+        Optional<Restaurant> restaurant = restaurantsRepository.findTop1ByOrderByMonthProfit();
+        return restaurant.orElseGet(restaurant::orElseThrow);
+    }
+
+    @Override
+    public Restaurant getRestaurantWithMaxYearProfit() {
+        Optional<Restaurant> restaurant = restaurantsRepository.findTop1ByOrderByYearProfit();
+        return restaurant.orElseGet(restaurant::orElseThrow);
     }
 
 

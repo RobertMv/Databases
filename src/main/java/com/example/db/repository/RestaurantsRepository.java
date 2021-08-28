@@ -14,4 +14,12 @@ public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findById(Long id);
 
     Optional<Restaurant> findByCity(String city);
+
+    Optional<Restaurant> findTop1ByOrderByMonthProfit();
+
+    Optional<Restaurant> findTop1ByOrderByYearProfit();
+
+    void deleteAll();
+
+    void deleteById();
 }

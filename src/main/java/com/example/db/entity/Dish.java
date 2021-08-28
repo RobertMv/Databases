@@ -22,4 +22,6 @@ public class Dish {
     private List<Product> requiredProducts;
 
     private String about;
+
+    private String name;
 }

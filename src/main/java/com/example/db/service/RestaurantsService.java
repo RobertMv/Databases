@@ -3,12 +3,15 @@ package com.example.db.service;
 import com.example.db.entity.Restaurant;
 
 import java.util.List;
-import java.util.Optional;
 
-interface RestaurantsService {
+public interface RestaurantsService {
     List<Restaurant> getAllRestaurants();
 
     Restaurant getRestaurant(Long id);
 
-    Optional<Restaurant> getRestaurant(String city);
+    Restaurant getRestaurant(String city);
+
+    Restaurant getRestaurantWithMaxMonthProfit();
+
+    Restaurant getRestaurantWithMaxYearProfit();
 }

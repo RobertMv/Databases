@@ -1,11 +1,10 @@
 package com.example.db.controller;
 
 import com.example.db.entity.Restaurant;
-import com.example.db.service.RestaurantsServiceImpl;
+import com.example.db.service.impl.RestaurantsServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/restaurants")
@@ -29,7 +28,16 @@ public class RestaurantsController {
 
     @GetMapping("/get/{city}")
     public Restaurant getRestaurant(@PathVariable String city) {
-        Optional<Restaurant> restaurant = restaurantsService.getRestaurant(city);
-        return restaurant.orElseGet(restaurant::orElseThrow);
+        return restaurantsService.getRestaurant(city);
+    }
+
+    @GetMapping("/get/month-profit")
+    public Restaurant getRestaurantWithMaxMonthProfit(){
+        return restaurantsService.getRestaurantWithMaxMonthProfit();
+    }
+
+    @GetMapping("/get/year-profit")
+    public Restaurant getRestaurantWithMaxYearProfit(){
+        return restaurantsService.getRestaurantWithMaxYearProfit();
     }
 }
