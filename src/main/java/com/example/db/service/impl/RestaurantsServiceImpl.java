@@ -47,5 +47,18 @@ public class RestaurantsServiceImpl implements RestaurantsService {
         return restaurant.orElseGet(restaurant::orElseThrow);
     }
 
+    @Override
+    public void saveRestaurant(Restaurant restaurant) {
+        restaurantsRepository.save(restaurant);
+    }
 
+    @Override
+    public void deleteAll() {
+        restaurantsRepository.deleteAll();
+    }
+
+    @Override
+    public void deleteRestaurantById(Long id) {
+        restaurantsRepository.deleteById(id);
+    }
 }

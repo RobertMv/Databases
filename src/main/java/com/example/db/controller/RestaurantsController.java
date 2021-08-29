@@ -40,4 +40,19 @@ public class RestaurantsController {
     public Restaurant getRestaurantWithMaxYearProfit(){
         return restaurantsService.getRestaurantWithMaxYearProfit();
     }
+
+    @PostMapping("/save")
+    public void saveRestaurant(Restaurant restaurant){
+        restaurantsService.saveRestaurant(restaurant);
+    }
+
+    @DeleteMapping("/delete-all")
+    public void deleteRestaurants(){
+        restaurantsService.deleteAll();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteRestaurant(@PathVariable Long id){
+        restaurantsService.deleteRestaurantById(id);
+    }
 }

@@ -14,4 +14,10 @@ public interface RestaurantsService {
     Restaurant getRestaurantWithMaxMonthProfit();
 
     Restaurant getRestaurantWithMaxYearProfit();
+
+    void saveRestaurant(Restaurant restaurant);
+
+    void deleteAll();
+
+    void deleteRestaurantById(Long id);
 }
