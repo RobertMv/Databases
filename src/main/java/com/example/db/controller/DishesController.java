@@ -32,8 +32,8 @@ public class DishesController {
     }
 
     @PostMapping("/save")
-    public void saveDish(){
-        dishesService.saveDish();
+    public void saveDish(Dish d){
+        dishesService.saveDish(d);
     }
 
     @DeleteMapping("/delete-all")

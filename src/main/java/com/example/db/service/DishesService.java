@@ -11,9 +11,11 @@ public interface DishesService {
 
     List<Dish> getSeasonalDishes();
 
-    void saveDish();
+    void saveDish(Dish d);
 
     void deleteAllDishes();
 
     void deleteById(Long id);
+
+    void deleteSeasonal();
 }
