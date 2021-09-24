@@ -5,7 +5,6 @@ import com.example.db.repository.DishesRepository;
 import com.example.db.service.DishesService;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,21 +34,21 @@ public class DishesServiceImpl implements DishesService {
 
     @Override
     public void saveDish(Dish d) {
-
+        dishesRepository.save(d);
     }
 
     @Override
     public void deleteAllDishes() {
-
+        dishesRepository.deleteAll();
     }
 
     @Override
     public void deleteById(Long id) {
-
+        dishesRepository.deleteById(id);
     }
 
     @Override
     public void deleteSeasonal() {
-
+        dishesRepository.deleteBySeasonalIsTrue();
     }
 }

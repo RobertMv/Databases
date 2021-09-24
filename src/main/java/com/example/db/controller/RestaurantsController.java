@@ -32,27 +32,27 @@ public class RestaurantsController {
     }
 
     @GetMapping("/get/month-profit")
-    public Restaurant getRestaurantWithMaxMonthProfit(){
+    public Restaurant getRestaurantWithMaxMonthProfit() {
         return restaurantsService.getRestaurantWithMaxMonthProfit();
     }
 
     @GetMapping("/get/year-profit")
-    public Restaurant getRestaurantWithMaxYearProfit(){
+    public Restaurant getRestaurantWithMaxYearProfit() {
         return restaurantsService.getRestaurantWithMaxYearProfit();
     }
 
     @PostMapping("/save")
-    public void saveRestaurant(Restaurant restaurant){
+    public void saveRestaurant(Restaurant restaurant) {
         restaurantsService.saveRestaurant(restaurant);
     }
 
     @DeleteMapping("/delete-all")
-    public void deleteRestaurants(){
+    public void deleteRestaurants() {
         restaurantsService.deleteAll();
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteRestaurant(@PathVariable Long id){
+    public void deleteRestaurant(@PathVariable Long id) {
         restaurantsService.deleteRestaurantById(id);
     }
 }

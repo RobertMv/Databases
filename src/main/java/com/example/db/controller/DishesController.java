@@ -17,32 +17,37 @@ public class DishesController {
     }
 
     @GetMapping("/get")
-    public List<Dish> getDishes(){
+    public List<Dish> getDishes() {
         return dishesService.getAll();
     }
 
     @GetMapping("/get/{name}")
-    public Dish getDish(@PathVariable String name){
+    public Dish getDish(@PathVariable String name) {
         return dishesService.getByName(name);
     }
 
     @GetMapping("/get-seasonal")
-    public List<Dish> getSeasonalDishes(){
+    public List<Dish> getSeasonalDishes() {
         return dishesService.getSeasonalDishes();
     }
 
     @PostMapping("/save")
-    public void saveDish(Dish d){
+    public void saveDish(Dish d) {
         dishesService.saveDish(d);
     }
 
     @DeleteMapping("/delete-all")
-    public void deleteAll(){
+    public void deleteAll() {
         dishesService.deleteAllDishes();
     }
 
+    @DeleteMapping("/delete-seasonal")
+    public void deleteSeasonalDishes() {
+        dishesService.deleteSeasonal();
+    }
+
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id){
+    public void deleteById(@PathVariable Long id) {
         dishesService.deleteById(id);
     }
 }

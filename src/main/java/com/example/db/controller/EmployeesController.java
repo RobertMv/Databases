@@ -1,7 +1,6 @@
 package com.example.db.controller;
 
 import com.example.db.entity.Employee;
-import com.example.db.entity.Restaurant;
 import com.example.db.service.impl.EmployeesServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,18 +36,18 @@ public class EmployeesController {
         return employeesService.getEmployee(passport);
     }
 
-   @PostMapping("/save")
-    public void saveEmployee(Employee employee){
+    @PostMapping("/save")
+    public void saveEmployee(Employee employee) {
         employeesService.saveEmployee(employee);
     }
 
     @DeleteMapping("/delete-all")
-    public void deleteEmployees(){
+    public void deleteEmployees() {
         employeesService.deleteAll();
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteEmployee(@PathVariable Long id){
+    public void deleteEmployee(@PathVariable Long id) {
         employeesService.deleteEmployeeById(id);
     }
 }
