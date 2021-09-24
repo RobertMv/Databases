@@ -49,6 +49,6 @@ public class DishesServiceImpl implements DishesService {
 
     @Override
     public void deleteSeasonal() {
-        dishesRepository.deleteBySeasonalIsTrue();
+        dishesRepository.deleteDishesBySeasonalIsTrue();
     }
 }

@@ -42,7 +42,7 @@ public class EmployeesServiceImpl implements EmployeesService {
 
     @Override
     public void saveEmployee(Employee e) {
-        employeesRepository.saveEmployee(e);
+        employeesRepository.save(e);
     }
 
     @Override

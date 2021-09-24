@@ -19,7 +19,7 @@ public class Restaurant {
 
     private String address;
 
-    private String City;
+    private String city;
 
     private Double monthProfit;
 

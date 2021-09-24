@@ -31,7 +31,7 @@ public class RestaurantsServiceImpl implements RestaurantsService {
 
     @Override
     public Restaurant getRestaurant(String city) {
-        Optional<Restaurant> restaurant = restaurantsRepository.findByCity(city);
+        Optional<Restaurant> restaurant = restaurantsRepository.findRestaurantByCity(city);
         return restaurant.orElseGet(restaurant::orElseThrow);
     }
 

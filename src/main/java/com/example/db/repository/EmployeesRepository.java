@@ -18,8 +18,6 @@ public interface EmployeesRepository extends JpaRepository<Employee, Long> {
 
     Optional<Employee> findByNameAndSurnameAndPatronymic(String name, String surname, String patronymic);
 
-    void saveEmployee(Employee employee);
-
     void deleteAll();
 
     void deleteEmployeeById(Long id);

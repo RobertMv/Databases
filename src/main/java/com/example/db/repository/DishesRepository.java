@@ -22,5 +22,5 @@ public interface DishesRepository extends JpaRepository<Dish, Long> {
 
     void deleteById(Long id);
 
-    void deleteBySeasonalIsTrue();
+    void deleteDishesBySeasonalIsTrue();
 }

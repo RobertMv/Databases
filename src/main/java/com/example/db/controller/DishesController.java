@@ -32,7 +32,7 @@ public class DishesController {
     }
 
     @PostMapping("/save")
-    public void saveDish(Dish d) {
+    public void saveDish(@RequestBody Dish d) {
         dishesService.saveDish(d);
     }
 

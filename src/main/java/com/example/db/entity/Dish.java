@@ -16,7 +16,7 @@ public class Dish {
     @Column(name = "dish_id")
     private Long id;
 
-    private boolean isSeasonal;
+    private boolean seasonal;
 
     @OneToMany
     private List<Product> requiredProducts;

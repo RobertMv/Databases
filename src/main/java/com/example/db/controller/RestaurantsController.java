@@ -42,7 +42,7 @@ public class RestaurantsController {
     }
 
     @PostMapping("/save")
-    public void saveRestaurant(Restaurant restaurant) {
+    public void saveRestaurant(@RequestBody Restaurant restaurant) {
         restaurantsService.saveRestaurant(restaurant);
     }
 

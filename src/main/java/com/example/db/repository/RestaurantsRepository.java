@@ -13,7 +13,7 @@ public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
 
     Optional<Restaurant> findById(Long id);
 
-    Optional<Restaurant> findByCity(String city);
+    Optional<Restaurant> findRestaurantByCity(String city);
 
     Optional<Restaurant> findTop1ByOrderByMonthProfit();
 
