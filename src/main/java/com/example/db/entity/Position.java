@@ -14,9 +14,12 @@ public class Position {
     @Column(name = "position_id")
     private Long id;
 
+    @Column(nullable = false)
     private Long code;
 
-    private String position;
+    @Column(nullable = false)
+    private String name;
 
+    @Column(nullable = false)
     private Double salary;
 }

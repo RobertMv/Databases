@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Позиции и должности</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/positions.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<form method="get">
+    <p><strong>Добавление позиции</strong></p>
+    <p><input id="position_code" type="number" min="0" max="9999" maxlength="50" placeholder="Код позиции" size="25"></p>
+    <p><input id="position_name" maxlength="50" type="text" placeholder="Название позиции" size="25"></p>
+    <p><input id="position_salary" maxlength="50" type="number" min="0" placeholder="Зарплата для позиции" size="25"></p>
+    <button onclick="add()" type="reset">Добавить позицию</button>
+</form>
+<hr>
+
+
+<form>
+    <p><strong>Поиск позиции по</strong></p>
+    <p>
+        <select id="selector" onchange="selectorChanged(this)">
+            <option value="0">Выберите опцию</option>
+            <option value="1">Уникальному номеру</option>
+            <option value="2">Названию</option>
+        </select>
+    </p>
+    <p><input id="find-by-name" maxlength="50" placeholder="Название позиции" size="25" style="display: none">
+        <input id="find-by-id" maxlength="20" placeholder="Уникальный номер позиции" size="25" style="display: none"></p>
+    <p><button onclick="find()" type="button">Найти позицию</button></p>
+    <p><table id="found-table" style="display: none">
+    <thead>
+    <tr>
+        <th>Уникальный номер</th>
+        <th>Код позиции</th>
+        <th>Название позиции</th>
+        <th>Зарплата для позиции</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table></p>
+</form>
+<hr>
+
+
+<p><strong>Обновить данные</strong></p>
+<p>Чтобы обновить данные позиции - найдите её и нажмите кнопку "Изменить" ниже</p>
+<button onclick="readyForUpdate()" type="button">Изменить</button>
+<p><input id="position_code_update" type="number" min="0" max="9999" maxlength="50" placeholder="Код позиции" size="25" style="display: none"></p>
+<p><input id="position_name_update" maxlength="50" type="text" placeholder="Название позиции" size="25" style="display: none"></p>
+<p><input id="position_salary_update" maxlength="50" type="number" min="0" placeholder="Зарплата для позиции" size="25" style="display: none"></p>
+<button id="position_update" onclick="update()" type="reset" style="display: none">Обновить позицию</button>
+<hr>
+
+
+<p><strong>Просмотреть все позиции</strong></p>
+<p><button id="getProducts" onclick="getAll()" type="button">Показать все позиции</button></p>
+<p><table id="table" style="display: none">
+    <thead>
+    <tr>
+        <th>Уникальный номер</th>
+        <th>Код позиции</th>
+        <th>Название позиции</th>
+        <th>Зарплата для позиции</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table></p>
+<hr>
+
+
+<p><strong>Удалить данные</strong></p>
+<p>Чтобы удалить позицию - введите её уникальный номер, чтобы удалить все позиции - нажмите кнопку "Удалить всё"</p>
+<p><input id="delete_product_by_id" maxlength="50" placeholder="Уникальный номер позиции" size="25"></p>
+<button onclick="deleteById()" type="reset">Удалить позицию</button>
+<button onclick="deleteAll()" type="button">Удалить всё</button>
+</body>
+</html>

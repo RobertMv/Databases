@@ -1,5 +1,7 @@
 package com.example.db.controller;
 
+import com.example.db.converter.DtoEntityMapping;
+import com.example.db.dto.ProductDto;
 import com.example.db.entity.Product;
 import com.example.db.service.ProductsService;
 import org.springframework.web.bind.annotation.*;
@@ -26,18 +28,23 @@ public class ProductsController {
         return productsService.getProductById(id);
     }
 
+    @GetMapping("/name/{name}")
+    public Product getByName(@PathVariable String name) {
+        return productsService.getProductByName(name);
+    }
+
     @PostMapping("/save")
-    public void saveProduct(@RequestBody Product product){
-        productsService.saveProduct(product);
+    public void saveProduct(@RequestBody ProductDto productDto) {
+        productsService.saveProduct(DtoEntityMapping.convert(productDto));
     }
 
     @DeleteMapping("/delete-all")
-    public void deleteAllProducts(){
+    public void deleteAllProducts() {
         productsService.deleteAll();
     }
 
     @DeleteMapping("/delete-id/{id}")
-    public void deleteById(@PathVariable Long id){
+    public void deleteById(@PathVariable Long id) {
         productsService.deleteProductById(id);
     }
 

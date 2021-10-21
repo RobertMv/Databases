@@ -15,4 +15,6 @@ public interface ProductsService {
     void deleteAll();
 
     void deleteProductById(Long id);
+
+    Product getProductByName(String name);
 }

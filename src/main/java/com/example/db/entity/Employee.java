@@ -20,20 +20,28 @@ public class Employee {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    @Column(nullable = false)
     private String surname;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String patronymic;
 
+    @Column(nullable = false)
     private Date dateOfBirth;
 
+    @Column(nullable = false)
     private String sex;
 
+    @Column(nullable = false, unique = true)
     private Long passport;
 
+    @Column(nullable = false)
     private Date dateOfEmployment;
 
+    @Column(unique = true)
     private String phone;
 
     @OneToOne

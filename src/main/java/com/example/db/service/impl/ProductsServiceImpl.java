@@ -42,4 +42,10 @@ public class ProductsServiceImpl implements ProductsService {
     public void deleteProductById(Long id) {
         productsRepository.deleteById(id);
     }
+
+    @Override
+    public Product getProductByName(String name) {
+        Optional<Product> product = productsRepository.findByName(name);
+        return product.orElseGet(product::orElseThrow);
+    }
 }

@@ -21,7 +21,9 @@ public class Dish {
     @OneToMany
     private List<Product> requiredProducts;
 
+    @Column(nullable = false)
     private String about;
 
+    @Column(nullable = false, unique = true)
     private String name;
 }

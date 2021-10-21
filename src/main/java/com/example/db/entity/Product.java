@@ -15,6 +15,7 @@ public class Product {
     @Column(name = "product_id")
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
 
     private String about;
