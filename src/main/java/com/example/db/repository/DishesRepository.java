@@ -16,11 +16,13 @@ public interface DishesRepository extends JpaRepository<Dish, Long> {
 
     List<Dish> findAll();
 
-    List<Dish> findDishesBySeasonalIsTrue();
+    List<Dish> findDishesBySeasonalTrue();
 
     void deleteAll();
 
     void deleteById(Long id);
 
     void deleteDishesBySeasonalIsTrue();
+
+    Optional<Dish> findDishById(Long id);
 }

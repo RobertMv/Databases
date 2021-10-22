@@ -29,7 +29,7 @@ public class DishesServiceImpl implements DishesService {
 
     @Override
     public List<Dish> getSeasonalDishes() {
-        return dishesRepository.findDishesBySeasonalIsTrue();
+        return dishesRepository.findDishesBySeasonalTrue();
     }
 
     @Override
@@ -50,5 +50,11 @@ public class DishesServiceImpl implements DishesService {
     @Override
     public void deleteSeasonal() {
         dishesRepository.deleteDishesBySeasonalIsTrue();
+    }
+
+    @Override
+    public Dish getById(Long id) {
+        Optional<Dish> d = dishesRepository.findDishById(id);
+        return d.orElseGet(d::orElseThrow);
     }
 }

@@ -16,14 +16,14 @@ public class Dish {
     @Column(name = "dish_id")
     private Long id;
 
-    private boolean seasonal;
-
-    @OneToMany
-    private List<Product> requiredProducts;
+    @Column(nullable = false, unique = true)
+    private String name;
 
     @Column(nullable = false)
     private String about;
 
-    @Column(nullable = false, unique = true)
-    private String name;
+    private boolean seasonal;
+
+    @ManyToMany
+    private List<Product> requiredProducts;
 }

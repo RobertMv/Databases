@@ -18,4 +18,6 @@ public interface DishesService {
     void deleteById(Long id);
 
     void deleteSeasonal();
+
+    Dish getById(Long id);
 }

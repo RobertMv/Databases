@@ -13,9 +13,11 @@ import java.util.List;
 public class ProductsController {
 
     private final ProductsService productsService;
+    private final DtoEntityMapping dtoEntityMapping;
 
-    public ProductsController(ProductsService productsService) {
+    public ProductsController(ProductsService productsService, DtoEntityMapping dtoEntityMapping) {
         this.productsService = productsService;
+        this.dtoEntityMapping = dtoEntityMapping;
     }
 
     @GetMapping("/all")
@@ -35,7 +37,7 @@ public class ProductsController {
 
     @PostMapping("/save")
     public void saveProduct(@RequestBody ProductDto productDto) {
-        productsService.saveProduct(DtoEntityMapping.convert(productDto));
+        productsService.saveProduct(dtoEntityMapping.convert(productDto));
     }
 
     @DeleteMapping("/delete-all")

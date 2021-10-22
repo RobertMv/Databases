@@ -10,10 +10,10 @@
 <body>
 <form method="get">
     <p><strong>Добавление блюда</strong></p>
-    <p><input id="about" type="text" maxlength="50" placeholder="Название" size="25"></p>
-    <p><input id="name" maxlength="50" type="text" placeholder="Описание" size="25"></p>
+    <p><input id="name" type="text" maxlength="50" placeholder="Название" size="25"></p>
+    <p><textarea id="about" cols="25" placeholder="Описание" rows="5"></textarea></p>
     <p><input id="seasonal" type="checkbox" size="25"> <label for="seasonal">Сезонное блюдо</label></p>
-    <p><select id="products" multiple></select></p>
+    <p><select id="products" multiple>Выберите продукты</select></p>
     <button onclick="add()" type="reset">Добавить блюдо</button>
 </form>
 <hr>
@@ -26,6 +26,7 @@
             <option value="0">Выберите опцию</option>
             <option value="1">Уникальному номеру</option>
             <option value="2">Названию</option>
+            <option value="3">Сезонности</option>
         </select>
     </p>
     <p><input id="find-by-name" maxlength="50" placeholder="Название" size="25" style="display: none">
@@ -52,10 +53,10 @@
 <p><strong>Обновить данные</strong></p>
 <p>Чтобы обновить данные блюда - найдите его и нажмите кнопку "Изменить" ниже</p>
 <button onclick="readyForUpdate()" type="button">Изменить</button>
-<p><input id="about_update" type="text" maxlength="50" placeholder="Название" size="25"></p>
-<p><input id="name_update" maxlength="50" type="text" placeholder="Описание" size="25"></p>
-<p><input id="seasonal_update" type="checkbox" size="25"> <label for="seasonal">Сезонное блюдо</label></p>
-<p><select id="products_update" multiple></select></p>
+<p><input id="name_update" maxlength="50" type="text" placeholder="Название" size="25" style="display: none"></p>
+<p><textarea id="about_update" cols="25" placeholder="Описание" rows="5" style="display: none"></textarea></p>
+<p><input id="seasonal_update" type="checkbox" size="25" style="display: none"> <label id="checkboxLabel" for="seasonal" style="display: none">Сезонное блюдо</label></p>
+<p><select id="products_update" multiple style="display: none">Выберите продукты</select></p>
 <button id="update" onclick="update()" type="reset" style="display: none">Обновить данные</button>
 <hr>
 
