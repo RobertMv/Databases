@@ -119,7 +119,7 @@ function update() {
     request.setRequestHeader("Content-type", "application/json");
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200){
-            alert("Позиция успешно обновлёна");
+            alert("Позиция успешно обновлена");
         }
     });
     request.send(product);

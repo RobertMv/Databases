@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,21 +17,16 @@ public class Employee {
     @Column(name = "employee_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
-
-    @Column(nullable = false)
-    private String surname;
-
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
+    private String surname;
+
     private String patronymic;
 
     @Column(nullable = false)
-    private Date dateOfBirth;
+    private LocalDate birthDate;
 
     @Column(nullable = false)
     private String sex;
@@ -39,7 +35,10 @@ public class Employee {
     private Long passport;
 
     @Column(nullable = false)
-    private Date dateOfEmployment;
+    private LocalDate employmentDate;
+
+    @Column(nullable = false)
+    private LocalDate date;
 
     @Column(unique = true)
     private String phone;

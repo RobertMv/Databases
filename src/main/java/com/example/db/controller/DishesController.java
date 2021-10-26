@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/dishes")
@@ -26,13 +27,8 @@ public class DishesController {
 
     @GetMapping("/all")
     public List<DishDto> getDishes() {
-        List<Dish> dishes = dishesService.getAll();
-        List<DishDto> dtos = new ArrayList<>();
-        for (Dish d : dishes) {
-            dtos.add(dtoEntityMapping.convert(d));
-        }
-        return dtos;
-    }
+        return dishesService.getAll().stream().map(dtoEntityMapping::convert).collect(Collectors.toList());
+}
 
     @GetMapping("/name/{name}")
     public DishDto getDish(@PathVariable String name) {
@@ -46,12 +42,7 @@ public class DishesController {
 
     @GetMapping("/seasonal")
     public List<DishDto> getSeasonalDishes() {
-        List<Dish> dishes = dishesService.getSeasonalDishes();
-        List<DishDto> dtos = new ArrayList<>();
-        for (Dish d : dishes) {
-            dtos.add(dtoEntityMapping.convert(d));
-        }
-        return dtos;
+        return dishesService.getSeasonalDishes().stream().map(dtoEntityMapping::convert).collect(Collectors.toList());
     }
 
     @PostMapping("/save")

@@ -1,44 +1,50 @@
 package com.example.db.controller;
 
-import com.example.db.entity.Employee;
+import com.example.db.converter.DtoEntityMapping;
+import com.example.db.dto.EmployeeDto;
 import com.example.db.service.impl.EmployeesServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeesController {
 
     private final EmployeesServiceImpl employeesService;
+    private final DtoEntityMapping dtoEntityMapping;
 
-    public EmployeesController(EmployeesServiceImpl employeesService) {
+    public EmployeesController(EmployeesServiceImpl employeesService, DtoEntityMapping dtoEntityMapping) {
         this.employeesService = employeesService;
+        this.dtoEntityMapping = dtoEntityMapping;
     }
 
-    @GetMapping("/get")
-    public List<Employee> getEmployees() {
-        return employeesService.getAllEmployees();
+    @GetMapping("/all")
+    public List<EmployeeDto> getEmployees() {
+        return employeesService.getAllEmployees().stream()
+                .map(dtoEntityMapping::convert)
+                .collect(Collectors.toList());
     }
 
-    @GetMapping("/get/{id}")
-    public Employee getEmployee(@PathVariable Long id) {
-        return employeesService.getEmployee(id);
+    @GetMapping("/id/{id}")
+    public EmployeeDto getEmployee(@PathVariable Long id) {
+        return dtoEntityMapping.convert(employeesService.getEmployee(id));
     }
 
-    @GetMapping("/get/{name}-{surname}-{patronymic}")
-    public Employee getEmployee(@PathVariable String name, @PathVariable String surname, @PathVariable String patronymic) {
-        return employeesService.getEmployee(name, surname, patronymic);
+    @GetMapping("/fio/{name}-{surname}-{patronymic}")
+    public EmployeeDto getEmployeeByFIO(@PathVariable String name, @PathVariable String surname, @PathVariable String patronymic) {
+        return dtoEntityMapping.convert(employeesService.getEmployee(name, surname, patronymic));
     }
 
-    @GetMapping("/get/passport/{passport}")
-    public Employee getEmployeeByPassport(@PathVariable Long passport) {
-        return employeesService.getEmployee(passport);
+    @GetMapping("/passport/{passport}")
+    public EmployeeDto getEmployeeByPassport(@PathVariable Long passport) {
+        return dtoEntityMapping.convert(employeesService.getEmployeeByPassport(passport));
     }
 
     @PostMapping("/save")
-    public void saveEmployee(@RequestBody Employee employee) {
-        employeesService.saveEmployee(employee);
+    public void saveEmployee(@RequestBody EmployeeDto employeeDto) {
+        employeesService.saveEmployee(dtoEntityMapping.convert(employeeDto));
     }
 
     @DeleteMapping("/delete-all")
@@ -46,7 +52,7 @@ public class EmployeesController {
         employeesService.deleteAll();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete-id/{id}")
     public void deleteEmployee(@PathVariable Long id) {
         employeesService.deleteEmployeeById(id);
     }
