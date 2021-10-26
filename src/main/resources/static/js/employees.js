@@ -170,19 +170,20 @@ function find() {
 
 function update() {
     let request = new XMLHttpRequest();
-    let name = document.getElementById("name").value;
-    let surname = document.getElementById("surname").value;
-    let patronymic = document.getElementById("patronymic").value;
-    let birthDate = document.getElementById("birthDate").value;
-    let sex = document.getElementById("sex").value;
-    let passport = document.getElementById("passport").value;
-    let employmentDate = document.getElementById("employmentDate").value;
-    let phone = document.getElementById("phone").value;
-    let position = document.getElementById("position").value;
-    let hours = document.getElementById("hours").value;
+    let name = document.getElementById("name_update").value;
+    let surname = document.getElementById("surname_update").value;
+    let patronymic = document.getElementById("patronymic_update").value;
+    let birthDate = document.getElementById("birthDate_update").value;
+    let sex = document.getElementById("sex_update").value;
+    let passport = document.getElementById("passport_update").value;
+    let employmentDate = document.getElementById("employmentDate_update").value;
+    let phone = document.getElementById("phone_update").value;
+    let position = document.getElementById("position_update").value;
+    let hours = document.getElementById("hours_update").value;
 
     const url = "/employees/save";
     let employee = JSON.stringify({
+        "id": lastFound.id,
         "name": name,
         "surname": surname,
         "patronymic": patronymic,
@@ -201,6 +202,7 @@ function update() {
             alert("Блюдо успешно обновлёно");
         }
     });
+    console.log(employee);
     request.send(employee);
 }
 function readyForUpdate() {

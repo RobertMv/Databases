@@ -20,5 +20,5 @@ public interface EmployeesRepository extends JpaRepository<Employee, Long> {
 
     void deleteAll();
 
-    void deleteEmployeeById(Long id);
+    void deleteById(Long id);
 }

@@ -4,8 +4,8 @@ import com.example.db.entity.Position;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 public class EmployeeDto {
@@ -17,13 +17,13 @@ public class EmployeeDto {
 
     private String patronymic;
 
-    private LocalDate birthDate;
+    private Date birthDate;
 
     private String sex;
 
     private Long passport;
 
-    private LocalDate employmentDate;
+    private Date employmentDate;
 
     private String phone;
 

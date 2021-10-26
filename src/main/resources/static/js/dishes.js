@@ -164,6 +164,7 @@ function update() {
     }
     const url = "/dishes/save";
     let product = JSON.stringify({
+        "id": lastFound.id,
         "about": about,
         "name": name,
         "seasonal": seasonal,

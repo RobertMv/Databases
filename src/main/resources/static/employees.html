@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
-<form>
+<form onsubmit="add()">
     <p><strong>Добавление работника</strong></p>
     <table>
         <tr>
@@ -25,10 +25,10 @@
     </select></p>
     <p><input required id="passport" type="text" pattern="[0-9]{10}" placeholder="Номер паспорта" size="25"></p>
     <p><label>Дата трудоустройства </label><input required id="employmentDate" type="date" placeholder="Дата трудоустройства" size="25"></p>
-    <p><input id="phone" type="tel" maxlength="11" placeholder="Номер телефона" size="25" minlength="7"></p>
+    <p><input id="phone" type="tel" pattern="[0-9]{11}" placeholder="Номер телефона" size="25" ></p>
     <p><label>Должность </label><select required id="position"></select></p>
     <p><label for="hours">Кол-во отработанных часов (мес.) </label><input id="hours" type="number" maxlength="50" placeholder="Часы" min="0"></p>
-    <button onclick="add()" type="submit">Добавить работника</button>
+    <button type="submit">Добавить работника</button>
 </form>
 <hr>
 
@@ -80,7 +80,7 @@
 <p><strong>Обновить данные</strong></p>
 <p>Чтобы обновить данные работника - найдите его и нажмите кнопку "Изменить" ниже</p>
 <p><button onclick="readyForUpdate()" type="button">Изменить</button></p>
-<form id="update_form" style="display: none">
+<form id="update_form" style="display: none" onsubmit="update()">
     <table>
         <tr>
             <td><input required id="name_update" type="text" maxlength="50" placeholder="Имя" size="25"></td>
@@ -96,11 +96,10 @@
     </select></p>
     <p><input required id="passport_update" type="text" pattern="[0-9]{10}" placeholder="Номер паспорта" size="25"></p>
     <p><label>Дата трудоустройства </label><input required id="employmentDate_update" type="date" placeholder="Дата трудоустройства" size="25"></p>
-    <p><input id="phone_update" type="tel" maxlength="11" placeholder="Номер телефона" size="25" minlength="7"></p>
+    <p><input id="phone_update" type="tel" pattern="[0-9]{11}" placeholder="Номер телефона" size="25" ></p>
     <p><label>Должность </label><select required id="position_update"></select></p>
     <p><label for="hours">Кол-во отработанных часов (мес.) </label><input id="hours_update" type="number" maxlength="50" placeholder="Часы" min="0"></p>
-
-    <button id="update" onclick="update()" type="reset">Обновить данные</button>
+    <button type="submit">Обновить данные</button>
 </form>
 <hr>
 
@@ -117,6 +116,7 @@
         <th>Дата рождения</th>
         <th>Пол</th>
         <th>Номер паспорта</th>
+        <th>Дата трудоустройства</th>
         <th>Номер телефона</th>
         <th>Должность</th>
         <th>Кол-во отработанных часов (месяц)</th>
@@ -132,7 +132,7 @@
 <p><strong>Удалить данные</strong></p>
 <p>Чтобы удалить работника - введите его уникальный номер, чтобы удалить всех - нажмите кнопку "Удалить всё"</p>
 <p><input id="delete_by_id" maxlength="50" placeholder="Уникальный номер" size="25"></p>
-<button onclick="deleteById()" type="reset">Удалить блюдо</button>
+<button onclick="deleteById()" type="reset">Удалить работника</button>
 <button onclick="deleteAll()" type="button">Удалить всё</button>
 </body>
 </html>
