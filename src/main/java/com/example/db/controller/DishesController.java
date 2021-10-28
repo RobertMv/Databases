@@ -2,12 +2,10 @@ package com.example.db.controller;
 
 import com.example.db.converter.DtoEntityMapping;
 import com.example.db.dto.DishDto;
-import com.example.db.entity.Dish;
 import com.example.db.repository.DishesRepository;
 import com.example.db.service.impl.DishesServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +26,7 @@ public class DishesController {
     @GetMapping("/all")
     public List<DishDto> getDishes() {
         return dishesService.getAll().stream().map(dtoEntityMapping::convert).collect(Collectors.toList());
-}
+    }
 
     @GetMapping("/name/{name}")
     public DishDto getDish(@PathVariable String name) {

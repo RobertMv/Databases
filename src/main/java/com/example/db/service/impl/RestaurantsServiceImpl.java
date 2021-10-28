@@ -29,11 +29,6 @@ public class RestaurantsServiceImpl implements RestaurantsService {
         return restaurant.orElseGet(restaurant::orElseThrow);
     }
 
-    @Override
-    public Restaurant getRestaurant(String city) {
-        Optional<Restaurant> restaurant = restaurantsRepository.findRestaurantByCity(city);
-        return restaurant.orElseGet(restaurant::orElseThrow);
-    }
 
     @Override
     public Restaurant getRestaurantWithMaxMonthProfit() {
@@ -60,5 +55,10 @@ public class RestaurantsServiceImpl implements RestaurantsService {
     @Override
     public void deleteRestaurantById(Long id) {
         restaurantsRepository.deleteById(id);
+    }
+
+    @Override
+    public Restaurant getRestaurantByName(String name) {
+        return restaurantsRepository.findByName(name).orElseThrow();
     }
 }

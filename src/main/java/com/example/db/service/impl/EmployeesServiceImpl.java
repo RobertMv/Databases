@@ -35,7 +35,7 @@ public class EmployeesServiceImpl implements EmployeesService {
     }
 
     @Override
-    public Employee getEmployee(String name, String surname, String patronymic) {
+    public Employee getEmployeeFIO(String name, String surname, String patronymic) {
         Optional<Employee> e = employeesRepository.findByNameAndSurnameAndPatronymic(name, surname, patronymic);
         return e.orElseGet(e::orElseThrow);
     }

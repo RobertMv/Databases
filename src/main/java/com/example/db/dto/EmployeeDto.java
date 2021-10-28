@@ -1,11 +1,8 @@
 package com.example.db.dto;
 
-import com.example.db.entity.Position;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.sql.Date;
-import java.time.LocalDate;
 
 @Data
 public class EmployeeDto {

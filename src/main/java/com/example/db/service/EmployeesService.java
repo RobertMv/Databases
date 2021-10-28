@@ -11,7 +11,7 @@ public interface EmployeesService {
 
     Employee getEmployeeByPassport(Long passport);
 
-    Employee getEmployee(String name, String surname, String patronymic);
+    Employee getEmployeeFIO(String name, String surname, String patronymic);
 
     void saveEmployee(Employee employee);
 

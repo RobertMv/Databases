@@ -9,8 +9,6 @@ public interface RestaurantsService {
 
     Restaurant getRestaurant(Long id);
 
-    Restaurant getRestaurant(String city);
-
     Restaurant getRestaurantWithMaxMonthProfit();
 
     Restaurant getRestaurantWithMaxYearProfit();
@@ -20,4 +18,6 @@ public interface RestaurantsService {
     void deleteAll();
 
     void deleteRestaurantById(Long id);
+
+    Restaurant getRestaurantByName(String name);
 }

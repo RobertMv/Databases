@@ -13,8 +13,6 @@ public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
 
     Optional<Restaurant> findById(Long id);
 
-    Optional<Restaurant> findRestaurantByCity(String city);
-
     Optional<Restaurant> findTop1ByOrderByMonthProfit();
 
     Optional<Restaurant> findTop1ByOrderByYearProfit();
@@ -22,4 +20,6 @@ public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
     void deleteAll();
 
     void deleteById(Long id);
+
+    Optional<Restaurant> findByName(String name);
 }

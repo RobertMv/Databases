@@ -17,19 +17,16 @@ public class Restaurant {
     @Column(name = "restaurant_id")
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    private String name;
+
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
-    private String city;
+    private Long monthProfit;
 
-    private Double monthProfit;
-
-    private Double yearProfit;
+    private Long yearProfit;
 
     @OneToMany
     private List<Employee> employees;
-
-    @OneToMany
-    private List<Dish> menu;
 }

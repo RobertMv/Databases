@@ -34,7 +34,7 @@ public class EmployeesController {
 
     @GetMapping("/fio/{name}-{surname}-{patronymic}")
     public EmployeeDto getEmployeeByFIO(@PathVariable String name, @PathVariable String surname, @PathVariable String patronymic) {
-        return dtoEntityMapping.convert(employeesService.getEmployee(name, surname, patronymic));
+        return dtoEntityMapping.convert(employeesService.getEmployeeFIO(name, surname, patronymic));
     }
 
     @GetMapping("/passport/{passport}")
