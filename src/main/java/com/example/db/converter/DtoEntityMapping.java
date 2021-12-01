@@ -55,6 +55,7 @@ public class DtoEntityMapping {
         dish.setId(dishDto.getId());
         dish.setSeasonal(dishDto.isSeasonal());
         dish.setRequiredProducts(getProductsByName(dishDto.getRequiredProducts()));
+        dish.setPrice(dishDto.getPrice());
         return dish;
     }
 
@@ -72,6 +73,7 @@ public class DtoEntityMapping {
         dishDto.setAbout(dish.getAbout());
         dishDto.setSeasonal(dish.isSeasonal());
         dishDto.setRequiredProducts(getProducts(dish));
+        dishDto.setPrice(dish.getPrice());
         return dishDto;
     }
 
@@ -94,7 +96,6 @@ public class DtoEntityMapping {
         employee.setEmploymentDate(employeeDto.getEmploymentDate());
         employee.setPhone(employeeDto.getPhone());
         employee.setPosition(positionsRepository.findByName(employeeDto.getPosition()).orElseThrow());
-        employee.setHours(employeeDto.getHours());
         return employee;
     }
 
@@ -110,7 +111,6 @@ public class DtoEntityMapping {
         employeeDto.setEmploymentDate(employee.getEmploymentDate());
         employeeDto.setPhone(employee.getPhone());
         employeeDto.setPosition(employee.getPosition().getName());
-        employeeDto.setHours(employee.getHours());
         return employeeDto;
     }
 

@@ -16,4 +16,6 @@ public class DishDto {
     private boolean seasonal;
 
     private List<String> requiredProducts;
+
+    private Integer price;
 }

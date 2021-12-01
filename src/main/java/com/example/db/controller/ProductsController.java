@@ -3,6 +3,7 @@ package com.example.db.controller;
 import com.example.db.converter.DtoEntityMapping;
 import com.example.db.dto.ProductDto;
 import com.example.db.entity.Product;
+import com.example.db.exception.NoProductDeletedException;
 import com.example.db.service.ProductsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,13 +42,12 @@ public class ProductsController {
     }
 
     @DeleteMapping("/delete-all")
-    public void deleteAllProducts() {
+    public void deleteAllProducts() throws NoProductDeletedException {
         productsService.deleteAll();
     }
 
     @DeleteMapping("/delete-id/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id) throws NoProductDeletedException {
         productsService.deleteProductById(id);
     }
-
 }

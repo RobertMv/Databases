@@ -1,12 +1,15 @@
 package com.example.db.service.impl;
 
 import com.example.db.entity.Dish;
+import com.example.db.exception.DishesEmptyException;
+import com.example.db.exception.NoDishDeletedException;
+import com.example.db.exception.NoDishFoundException;
+import com.example.db.exception.WrongInputException;
 import com.example.db.repository.DishesRepository;
 import com.example.db.service.DishesService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DishesServiceImpl implements DishesService {
@@ -19,42 +22,66 @@ public class DishesServiceImpl implements DishesService {
 
     @Override
     public List<Dish> getAll() {
-        return dishesRepository.findAll();
+        try {
+            return dishesRepository.findAll();
+        } catch (Exception e) {
+            throw new DishesEmptyException();
+        }
     }
 
     public Dish getByName(String name) {
-        Optional<Dish> d = dishesRepository.findDishByName(name);
-        return d.orElseGet(d::orElseThrow);
+        return dishesRepository.findDishByName(name)
+                .orElseThrow(NoDishFoundException::new);
     }
 
     @Override
     public List<Dish> getSeasonalDishes() {
-        return dishesRepository.findDishesBySeasonalTrue();
+        try {
+            return dishesRepository.findDishesBySeasonalTrue();
+        } catch (Exception e) {
+            throw new DishesEmptyException();
+        }
     }
 
     @Override
-    public void saveDish(Dish d) {
-        dishesRepository.save(d);
+    public void saveDish(Dish dish) {
+        try {
+            dishesRepository.save(dish);
+        } catch (Exception e) {
+            throw new WrongInputException();
+        }
     }
 
     @Override
     public void deleteAllDishes() {
-        dishesRepository.deleteAll();
+        try {
+            dishesRepository.deleteAll();
+        } catch (Exception e) {
+            throw new DishesEmptyException();
+        }
     }
 
     @Override
     public void deleteById(Long id) {
-        dishesRepository.deleteById(id);
+        try {
+            dishesRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new NoDishDeletedException();
+        }
     }
 
     @Override
     public void deleteSeasonal() {
-        dishesRepository.deleteDishesBySeasonalIsTrue();
+        try {
+            dishesRepository.deleteDishesBySeasonalIsTrue();
+        } catch (Exception e) {
+            throw new DishesEmptyException();
+        }
     }
 
     @Override
     public Dish getById(Long id) {
-        Optional<Dish> d = dishesRepository.findDishById(id);
-        return d.orElseGet(d::orElseThrow);
+        return dishesRepository.findDishById(id)
+                .orElseThrow(NoDishFoundException::new);
     }
 }

@@ -1,4 +1,5 @@
 let lastFoundProduct = null;
+
 function add() {
     let request = new XMLHttpRequest();
     let code = document.getElementById("position_code").value;
@@ -13,8 +14,11 @@ function add() {
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.addEventListener("readystatechange", () => {
-        if (request.readyState === 4 && request.status === 200){
+        if (request.readyState === 4 && request.status === 200) {
             alert("Позиция успешно сохранена");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send(product);
@@ -29,8 +33,11 @@ function getAll() {
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
             alert("Все данные успешно получены");
-            document.getElementById("table").style.display="block";
+            document.getElementById("table").style.display = "block";
             fillTable(request.response, "table");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();
@@ -57,18 +64,18 @@ function fillTable(jsonData, tableId) {
 }
 
 function selectorChanged(selected) {
-    switch (selected.value){
+    switch (selected.value) {
         case "0":
-            document.getElementById("find-by-name").style.display='none';
-            document.getElementById("find-by-id").style.display='none';
+            document.getElementById("find-by-name").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'none';
             break;
         case "1":
-            document.getElementById("find-by-name").style.display='none';
-            document.getElementById("find-by-id").style.display='block';
+            document.getElementById("find-by-name").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'block';
             break;
         case "2":
-            document.getElementById("find-by-name").style.display='block';
-            document.getElementById("find-by-id").style.display='none';
+            document.getElementById("find-by-name").style.display = 'block';
+            document.getElementById("find-by-id").style.display = 'none';
             break;
     }
 }
@@ -92,12 +99,15 @@ function find() {
     request.responseType = "json";
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
-            document.getElementById("found-table").style.display="block";
+            document.getElementById("found-table").style.display = "block";
             let jsonData = [];
             jsonData.push(request.response);
             console.log(jsonData);
             lastFoundProduct = request.response;
             fillTable(jsonData, "found-table");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();
@@ -118,27 +128,31 @@ function update() {
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.addEventListener("readystatechange", () => {
-        if (request.readyState === 4 && request.status === 200){
+        if (request.readyState === 4 && request.status === 200) {
             alert("Позиция успешно обновлена");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send(product);
 }
+
 function readyForUpdate() {
-    if (lastFoundProduct == null){
+    if (lastFoundProduct == null) {
         alert("Сначала найдите позицию!");
     } else {
-        document.getElementById("position_code_update").style.display="block";
-        document.getElementById("position_name_update").style.display="block";
-        document.getElementById("position_salary_update").style.display="block";
-        document.getElementById("position_update").style.display="block";
+        document.getElementById("position_code_update").style.display = "block";
+        document.getElementById("position_name_update").style.display = "block";
+        document.getElementById("position_salary_update").style.display = "block";
+        document.getElementById("position_update").style.display = "block";
         document.getElementById("position_code_update").value = lastFoundProduct.code;
         document.getElementById("position_name_update").value = lastFoundProduct.name;
         document.getElementById("position_salary_update").value = lastFoundProduct.salary;
     }
 }
 
-function deleteById () {
+function deleteById() {
     let request = new XMLHttpRequest();
     const url = "/positions/delete-id/" + document.getElementById("delete_product_by_id").value;
     request.open("DELETE", url);
@@ -149,11 +163,14 @@ function deleteById () {
             alert("Позиция успешно удалена");
             document.getElementById("delete_product_by_id").value = "";
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     request.send();
 }
 
-function deleteAll () {
+function deleteAll() {
     let request = new XMLHttpRequest();
     const url = "/products/all";
     request.open("DELETE", url);
@@ -162,6 +179,9 @@ function deleteAll () {
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
             alert("Все позиции успешно удалены");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();

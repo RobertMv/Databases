@@ -1,4 +1,5 @@
 let lastFoundProduct = null;
+
 function add() {
     let request = new XMLHttpRequest();
     let name = document.getElementById("product_name").value;
@@ -11,8 +12,11 @@ function add() {
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.addEventListener("readystatechange", () => {
-        if (request.readyState === 4 && request.status === 200){
+        if (request.readyState === 4 && request.status === 200) {
             alert("Продукт успешно добавлен");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send(product);
@@ -27,8 +31,11 @@ function getAll() {
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
             alert("Все данные успешно получены");
-            document.getElementById("products-table").style.display="block";
+            document.getElementById("products-table").style.display = "block";
             fillTable(request.response, "products-table");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();
@@ -55,18 +62,18 @@ function fillTable(jsonData, tableId) {
 }
 
 function selectorChanged(selected) {
-    switch (selected.value){
+    switch (selected.value) {
         case "0":
-            document.getElementById("find-by-name").style.display='none';
-            document.getElementById("find-by-id").style.display='none';
+            document.getElementById("find-by-name").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'none';
             break;
         case "1":
-            document.getElementById("find-by-name").style.display='none';
-            document.getElementById("find-by-id").style.display='block';
+            document.getElementById("find-by-name").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'block';
             break;
         case "2":
-            document.getElementById("find-by-name").style.display='block';
-            document.getElementById("find-by-id").style.display='none';
+            document.getElementById("find-by-name").style.display = 'block';
+            document.getElementById("find-by-id").style.display = 'none';
             break;
     }
 }
@@ -90,12 +97,15 @@ function find() {
     request.responseType = "json";
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
-            document.getElementById("products-found-table").style.display="block";
+            document.getElementById("products-found-table").style.display = "block";
             let jsonData = [];
             jsonData.push(request.response);
             console.log(jsonData);
             lastFoundProduct = request.response;
             fillTable(jsonData, "products-found-table");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();
@@ -114,25 +124,29 @@ function update() {
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.addEventListener("readystatechange", () => {
-        if (request.readyState === 4 && request.status === 200){
+        if (request.readyState === 4 && request.status === 200) {
             alert("Продукт успешно обновлён");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send(product);
 }
+
 function readyForUpdate() {
-    if (lastFoundProduct == null){
+    if (lastFoundProduct == null) {
         alert("Сначала найдите продукт!");
     } else {
-        document.getElementById("product_name_update").style.display="block";
-        document.getElementById("product_about_update").style.display="block";
-        document.getElementById("product_update").style.display="block";
+        document.getElementById("product_name_update").style.display = "block";
+        document.getElementById("product_about_update").style.display = "block";
+        document.getElementById("product_update").style.display = "block";
         document.getElementById("product_name_update").value = lastFoundProduct.name;
         document.getElementById("product_about_update").value = lastFoundProduct.about;
     }
 }
 
-function deleteById () {
+function deleteById() {
     let request = new XMLHttpRequest();
     const url = "/products/delete-id/" + document.getElementById("delete_product_by_id").value;
     request.open("DELETE", url);
@@ -142,11 +156,14 @@ function deleteById () {
         if (request.readyState === 4 && request.status === 200) {
             alert("Продукт успешно удалён");
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     request.send();
 }
 
-function deleteAll () {
+function deleteAll() {
     let request = new XMLHttpRequest();
     const url = "/products/all";
     request.open("DELETE", url);
@@ -155,6 +172,9 @@ function deleteAll () {
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
             alert("Все продукты успешно удалены");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();

@@ -1,12 +1,15 @@
 package com.example.db.service.impl;
 
 import com.example.db.entity.Employee;
+import com.example.db.exception.EmployeesEmptyException;
+import com.example.db.exception.NoEmployeeDeletedException;
+import com.example.db.exception.NoEmployeeFoundException;
+import com.example.db.exception.WrongInputException;
 import com.example.db.repository.EmployeesRepository;
 import com.example.db.service.EmployeesService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeesServiceImpl implements EmployeesService {
@@ -19,39 +22,55 @@ public class EmployeesServiceImpl implements EmployeesService {
 
     @Override
     public List<Employee> getAllEmployees() {
-        return employeesRepository.findAll();
+        try {
+            return employeesRepository.findAll();
+        } catch (Exception e) {
+            throw new EmployeesEmptyException();
+        }
     }
 
     @Override
     public Employee getEmployee(Long id) {
-        Optional<Employee> e = employeesRepository.findById(id);
-        return e.orElseGet(e::orElseThrow);
+        return employeesRepository.findById(id)
+                .orElseThrow(NoEmployeeFoundException::new);
     }
 
     @Override
     public Employee getEmployeeByPassport(Long passport) {
-        Optional<Employee> e = employeesRepository.findByPassport(passport);
-        return e.orElseGet(e::orElseThrow);
+        return employeesRepository.findByPassport(passport)
+                .orElseThrow(NoEmployeeFoundException::new);
     }
 
     @Override
     public Employee getEmployeeFIO(String name, String surname, String patronymic) {
-        Optional<Employee> e = employeesRepository.findByNameAndSurnameAndPatronymic(name, surname, patronymic);
-        return e.orElseGet(e::orElseThrow);
+        return employeesRepository.findByNameAndSurnameAndPatronymic(name, surname, patronymic)
+                .orElseThrow(NoEmployeeFoundException::new);
     }
 
     @Override
-    public void saveEmployee(Employee e) {
-        employeesRepository.save(e);
+    public void saveEmployee(Employee employee) {
+        try {
+            employeesRepository.save(employee);
+        } catch (Exception e) {
+            throw new WrongInputException();
+        }
     }
 
     @Override
     public void deleteAll() {
-        employeesRepository.deleteAll();
+        try {
+            employeesRepository.deleteAll();
+        } catch (Exception e) {
+            throw new EmployeesEmptyException();
+        }
     }
 
     @Override
     public void deleteEmployeeById(Long id) {
-        employeesRepository.deleteById(id);
+        try {
+            employeesRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new NoEmployeeDeletedException();
+        }
     }
 }

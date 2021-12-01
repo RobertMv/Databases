@@ -1,12 +1,15 @@
 package com.example.db.service.impl;
 
 import com.example.db.entity.Position;
+import com.example.db.exception.NoPositionDeletedException;
+import com.example.db.exception.NoPositionFoundException;
+import com.example.db.exception.PositionsEmptyException;
+import com.example.db.exception.WrongInputException;
 import com.example.db.repository.PositionsRepository;
 import com.example.db.service.PositionsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PositionsServiceImpl implements PositionsService {
@@ -18,33 +21,49 @@ public class PositionsServiceImpl implements PositionsService {
 
     @Override
     public List<Position> getAllPositions() {
-        return positionsRepository.findAll();
+        try {
+            return positionsRepository.findAll();
+        } catch (Exception e) {
+            throw new PositionsEmptyException();
+        }
     }
 
     @Override
     public Position getPositionById(Long id) {
-        Optional<Position> position = positionsRepository.findById(id);
-        return position.orElseGet(position::orElseThrow);
+        return positionsRepository.findById(id)
+                .orElseThrow(NoPositionFoundException::new);
     }
 
     @Override
     public void savePosition(Position position) {
-        positionsRepository.save(position);
+        try {
+            positionsRepository.save(position);
+        } catch (Exception e) {
+            throw new WrongInputException();
+        }
     }
 
     @Override
     public void deleteAll() {
-        positionsRepository.deleteAll();
+        try {
+            positionsRepository.deleteAll();
+        } catch (Exception e) {
+            throw new PositionsEmptyException();
+        }
     }
 
     @Override
     public void deletePositionById(Long id) {
-        positionsRepository.deleteById(id);
+        try {
+            positionsRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new NoPositionDeletedException();
+        }
     }
 
     @Override
     public Position getPositionByName(String name) {
-        Optional<Position> position = positionsRepository.findByName(name);
-        return position.orElseGet(position::orElseThrow);
+        return positionsRepository.findByName(name)
+                .orElseThrow(NoPositionFoundException::new);
     }
 }

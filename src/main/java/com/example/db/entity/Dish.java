@@ -26,4 +26,6 @@ public class Dish {
 
     @ManyToMany
     private List<Product> requiredProducts;
+
+    private Integer price;
 }

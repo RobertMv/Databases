@@ -2,12 +2,15 @@ package com.example.db.service.impl;
 
 
 import com.example.db.entity.Restaurant;
+import com.example.db.exception.NoRestaurantDeletedException;
+import com.example.db.exception.NoRestaurantFoundException;
+import com.example.db.exception.RestaurantsEmptyException;
+import com.example.db.exception.WrongInputException;
 import com.example.db.repository.RestaurantsRepository;
 import com.example.db.service.RestaurantsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RestaurantsServiceImpl implements RestaurantsService {
@@ -20,45 +23,62 @@ public class RestaurantsServiceImpl implements RestaurantsService {
 
     @Override
     public List<Restaurant> getAllRestaurants() {
-        return restaurantsRepository.findAll();
+        try {
+            return restaurantsRepository.findAll();
+        } catch (Exception e) {
+            throw new RestaurantsEmptyException();
+        }
     }
 
     @Override
     public Restaurant getRestaurant(Long id) {
-        Optional<Restaurant> restaurant = restaurantsRepository.findById(id);
-        return restaurant.orElseGet(restaurant::orElseThrow);
+        return restaurantsRepository.findById(id)
+                .orElseThrow(NoRestaurantFoundException::new);
     }
 
 
     @Override
     public Restaurant getRestaurantWithMaxMonthProfit() {
-        Optional<Restaurant> restaurant = restaurantsRepository.findTop1ByOrderByMonthProfit();
-        return restaurant.orElseGet(restaurant::orElseThrow);
+        return restaurantsRepository.findTop1ByOrderByMonthProfit()
+                .orElseThrow(RestaurantsEmptyException::new);
     }
 
     @Override
     public Restaurant getRestaurantWithMaxYearProfit() {
-        Optional<Restaurant> restaurant = restaurantsRepository.findTop1ByOrderByYearProfit();
-        return restaurant.orElseGet(restaurant::orElseThrow);
+        return restaurantsRepository.findTop1ByOrderByYearProfit()
+                .orElseThrow(RestaurantsEmptyException::new);
     }
 
     @Override
     public void saveRestaurant(Restaurant restaurant) {
-        restaurantsRepository.save(restaurant);
+        try {
+            restaurantsRepository.save(restaurant);
+        } catch (Exception e) {
+            throw new WrongInputException();
+        }
     }
 
     @Override
     public void deleteAll() {
-        restaurantsRepository.deleteAll();
+        try {
+            restaurantsRepository.deleteAll();
+        } catch (Exception e) {
+            throw new RestaurantsEmptyException();
+        }
     }
 
     @Override
     public void deleteRestaurantById(Long id) {
-        restaurantsRepository.deleteById(id);
+        try {
+            restaurantsRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new NoRestaurantDeletedException();
+        }
     }
 
     @Override
     public Restaurant getRestaurantByName(String name) {
-        return restaurantsRepository.findByName(name).orElseThrow();
+        return restaurantsRepository.findByName(name)
+                .orElseThrow(NoRestaurantFoundException::new);
     }
 }

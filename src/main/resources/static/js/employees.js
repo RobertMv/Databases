@@ -12,6 +12,9 @@ function loadPositions() {
             fillOptions(request.response, "position");
             fillOptions(request.response, "position_update");
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     request.send();
 }
@@ -27,13 +30,14 @@ function fillOptions(jsonData, id) {
 
     let option;
 
-    for (let i = 0; i < jsonData.length; i++){
+    for (let i = 0; i < jsonData.length; i++) {
         option = document.createElement('option');
         option.text = jsonData[i].name;
         option.value = jsonData[i].name;
         positionsSelector.add(option);
     }
 }
+
 function add() {
     let request = new XMLHttpRequest();
     let name = document.getElementById("name").value;
@@ -64,8 +68,11 @@ function add() {
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.addEventListener("readystatechange", () => {
-        if (request.readyState === 4 && request.status === 200){
+        if (request.readyState === 4 && request.status === 200) {
             alert("Работник успешно сохранен");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     console.log(employee);
@@ -81,8 +88,11 @@ function getAll() {
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
             alert("Все данные успешно получены");
-            document.getElementById("table").style.display="block";
+            document.getElementById("table").style.display = "block";
             fillTable(request.response, "table");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();
@@ -109,26 +119,26 @@ function fillTable(jsonData, tableId) {
 }
 
 function selectorChanged(selected) {
-    switch (selected.value){
+    switch (selected.value) {
         case "0":
-            document.getElementById("find-fio-table").style.display='none';
-            document.getElementById("find-by-id").style.display='none';
-            document.getElementById("find-by-passport").style.display='none';
+            document.getElementById("find-fio-table").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'none';
+            document.getElementById("find-by-passport").style.display = 'none';
             break;
         case "1":
-            document.getElementById("find-fio-table").style.display='none';
-            document.getElementById("find-by-id").style.display='block';
-            document.getElementById("find-by-passport").style.display='none';
+            document.getElementById("find-fio-table").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'block';
+            document.getElementById("find-by-passport").style.display = 'none';
             break;
         case "2":
-            document.getElementById("find-fio-table").style.display='block';
-            document.getElementById("find-by-id").style.display='none';
-            document.getElementById("find-by-passport").style.display='none';
+            document.getElementById("find-fio-table").style.display = 'block';
+            document.getElementById("find-by-id").style.display = 'none';
+            document.getElementById("find-by-passport").style.display = 'none';
             break;
         case "3":
-            document.getElementById("find-fio-table").style.display='none';
-            document.getElementById("find-by-id").style.display='none';
-            document.getElementById("find-by-passport").style.display='block';
+            document.getElementById("find-fio-table").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'none';
+            document.getElementById("find-by-passport").style.display = 'block';
     }
 }
 
@@ -157,12 +167,15 @@ function find() {
     request.responseType = "json";
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
-            document.getElementById("found-table").style.display="block";
+            document.getElementById("found-table").style.display = "block";
             let jsonData = [];
             jsonData.push(request.response);
             console.log(jsonData);
             lastFound = request.response;
             fillTable(jsonData, "found-table");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();
@@ -198,18 +211,22 @@ function update() {
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.addEventListener("readystatechange", () => {
-        if (request.readyState === 4 && request.status === 200){
+        if (request.readyState === 4 && request.status === 200) {
             alert("Блюдо успешно обновлёно");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     console.log(employee);
     request.send(employee);
 }
+
 function readyForUpdate() {
-    if (lastFound == null){
+    if (lastFound == null) {
         alert("Сначала найдите работника!");
     } else {
-        document.getElementById("update_form").style.display="block";
+        document.getElementById("update_form").style.display = "block";
 
         document.getElementById("name_update").value = lastFound.name;
         document.getElementById("surname_update").value = lastFound.surname;
@@ -224,7 +241,7 @@ function readyForUpdate() {
     }
 }
 
-function deleteById () {
+function deleteById() {
     let request = new XMLHttpRequest();
     const url = "/employees/delete-id/" + document.getElementById("delete_by_id").value;
     request.open("DELETE", url);
@@ -235,11 +252,14 @@ function deleteById () {
             alert("Работник успешно удалён");
             document.getElementById("delete_by_id").value = "";
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     request.send();
 }
 
-function deleteAll () {
+function deleteAll() {
     let request = new XMLHttpRequest();
     const url = "/employees/delete-all";
     request.open("DELETE", url);
@@ -248,6 +268,9 @@ function deleteAll () {
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
             alert("Все работники успешно удалены");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();

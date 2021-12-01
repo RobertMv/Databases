@@ -7,6 +7,6 @@ td:first-child {
     text-align: center;
 }
 
-td:last-child{
+td:last-child {
     max-width: 600px;
 }

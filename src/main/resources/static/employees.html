@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Работники и персонал</title>
-    <link rel="stylesheet" href="employees.css">
+    <link href="employees.css" rel="stylesheet">
     <script src="js/employees.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
@@ -12,22 +12,25 @@
     <p><strong>Добавление работника</strong></p>
     <table>
         <tr>
-            <td><input id="name" type="text" maxlength="50" placeholder="Имя" size="25" required></td>
-            <td><input id="surname" type="text" maxlength="50" placeholder="Фамилия" size="25" required></td>
-            <td><input id="patronymic" type="text" maxlength="50" placeholder="Отчество" size="25"></td>
+            <td><input id="name" maxlength="50" placeholder="Имя" required size="25" type="text"></td>
+            <td><input id="surname" maxlength="50" placeholder="Фамилия" required size="25" type="text"></td>
+            <td><input id="patronymic" maxlength="50" placeholder="Отчество" size="25" type="text"></td>
         </tr>
     </table>
-    <p><label>Дата рождения </label><input required id="birthDate" type="date" placeholder="Дата рождения" size="25"></p>
-    <p><label>Пол </label><select required id="sex">
+    <p><label>Дата рождения </label><input id="birthDate" placeholder="Дата рождения" required size="25" type="date">
+    </p>
+    <p><label>Пол </label><select id="sex" required>
         <option disabled>Выберите пол</option>
         <option value="Мужской">Мужской</option>
         <option value="Женский">Женский</option>
     </select></p>
-    <p><input required id="passport" type="text" pattern="[0-9]{10}" placeholder="Номер паспорта" size="25"></p>
-    <p><label>Дата трудоустройства </label><input required id="employmentDate" type="date" placeholder="Дата трудоустройства" size="25"></p>
-    <p><input id="phone" type="tel" pattern="[0-9]{11}" placeholder="Номер телефона" size="25" ></p>
-    <p><label>Должность </label><select required id="position"></select></p>
-    <p><label for="hours">Кол-во отработанных часов (мес.) </label><input id="hours" type="number" maxlength="50" placeholder="Часы" min="0"></p>
+    <p><input id="passport" pattern="[0-9]{10}" placeholder="Номер паспорта" required size="25" type="text"></p>
+    <p><label>Дата трудоустройства </label><input id="employmentDate" placeholder="Дата трудоустройства" required
+                                                  size="25" type="date"></p>
+    <p><input id="phone" pattern="[0-9]{11}" placeholder="Номер телефона" size="25" type="tel"></p>
+    <p><label>Должность </label><select id="position" required></select></p>
+    <p><label for="hours">Кол-во отработанных часов (мес.) </label><input id="hours" maxlength="50" min="0"
+                                                                          placeholder="Часы" type="number"></p>
     <button type="submit">Добавить работника</button>
 </form>
 <hr>
@@ -37,7 +40,7 @@
     <p><strong>Поиск работника по</strong></p>
     <p>
         <select id="selector" onchange="selectorChanged(this)">
-            <option value="0" disabled>Выберите опцию</option>
+            <option disabled value="0">Выберите опцию</option>
             <option value="1">Уникальному номеру</option>
             <option value="2">ФИО</option>
             <option value="3">Номеру паспорта</option>
@@ -49,64 +52,77 @@
         <tr>
             <td><input id="find-by-name" maxlength="80" placeholder="Имя" size="25" style="display: block"></td>
             <td><input id="find-by-surname" maxlength="80" placeholder="Фамилия" size="25" style="display: block"></td>
-            <td><input id="find-by-patronymic" maxlength="80" placeholder="Отчество" size="25" style="display: block"></td>
+            <td><input id="find-by-patronymic" maxlength="80" placeholder="Отчество" size="25" style="display: block">
+            </td>
         </tr>
     </table>
-    <p><button onclick="find()" type="button">Найти</button></p>
-    <p><table id="found-table" style="display: none">
-    <thead>
-    <tr>
-        <th>Уникальный номер</th>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Отчество</th>
-        <th>Дата рождения</th>
-        <th>Пол</th>
-        <th>Номер паспорта</th>
-        <th>Дата трудоустройства</th>
-        <th>Номер телефона</th>
-        <th>Должность</th>
-        <th>Кол-во отработанных часов (месяц)</th>
-    </tr>
-    </thead>
-    <tbody>
+    <p>
+        <button onclick="find()" type="button">Найти</button>
+    </p>
+    <p>
+    <table id="found-table" style="display: none">
+        <thead>
+        <tr>
+            <th>Уникальный номер</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+            <th>Пол</th>
+            <th>Номер паспорта</th>
+            <th>Дата трудоустройства</th>
+            <th>Номер телефона</th>
+            <th>Должность</th>
+            <th>Кол-во отработанных часов (месяц)</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    </tbody>
-</table></p>
+        </tbody>
+    </table>
+    </p>
 </form>
 <hr>
 
 
 <p><strong>Обновить данные</strong></p>
 <p>Чтобы обновить данные работника - найдите его и нажмите кнопку "Изменить" ниже</p>
-<p><button onclick="readyForUpdate()" type="button">Изменить</button></p>
-<form id="update_form" style="display: none" onsubmit="update()">
+<p>
+    <button onclick="readyForUpdate()" type="button">Изменить</button>
+</p>
+<form id="update_form" onsubmit="update()" style="display: none">
     <table>
         <tr>
-            <td><input required id="name_update" type="text" maxlength="50" placeholder="Имя" size="25"></td>
-            <td><input required id="surname_update" type="text" maxlength="50" placeholder="Фамилия" size="25"></td>
-            <td><input required id="patronymic_update" type="text" maxlength="50" placeholder="Отчество" size="25"></td>
+            <td><input id="name_update" maxlength="50" placeholder="Имя" required size="25" type="text"></td>
+            <td><input id="surname_update" maxlength="50" placeholder="Фамилия" required size="25" type="text"></td>
+            <td><input id="patronymic_update" maxlength="50" placeholder="Отчество" required size="25" type="text"></td>
         </tr>
     </table>
-    <p><label>Дата рождения </label><input required id="birthDate_update" type="date" placeholder="Дата рождения" size="25"></p>
-    <p><label>Пол </label><select required id="sex_update">
-        <option value="0" disabled>Выберите пол</option>
+    <p><label>Дата рождения </label><input id="birthDate_update" placeholder="Дата рождения" required size="25"
+                                           type="date"></p>
+    <p><label>Пол </label><select id="sex_update" required>
+        <option disabled value="0">Выберите пол</option>
         <option value="Мужской">Мужской</option>
         <option value="Женский">Женский</option>
     </select></p>
-    <p><input required id="passport_update" type="text" pattern="[0-9]{10}" placeholder="Номер паспорта" size="25"></p>
-    <p><label>Дата трудоустройства </label><input required id="employmentDate_update" type="date" placeholder="Дата трудоустройства" size="25"></p>
-    <p><input id="phone_update" type="tel" pattern="[0-9]{11}" placeholder="Номер телефона" size="25" ></p>
-    <p><label>Должность </label><select required id="position_update"></select></p>
-    <p><label for="hours">Кол-во отработанных часов (мес.) </label><input id="hours_update" type="number" maxlength="50" placeholder="Часы" min="0"></p>
+    <p><input id="passport_update" pattern="[0-9]{10}" placeholder="Номер паспорта" required size="25" type="text"></p>
+    <p><label>Дата трудоустройства </label><input id="employmentDate_update" placeholder="Дата трудоустройства" required
+                                                  size="25" type="date"></p>
+    <p><input id="phone_update" pattern="[0-9]{11}" placeholder="Номер телефона" size="25" type="tel"></p>
+    <p><label>Должность </label><select id="position_update" required></select></p>
+    <p><label for="hours">Кол-во отработанных часов (мес.) </label><input id="hours_update" maxlength="50" min="0"
+                                                                          placeholder="Часы" type="number"></p>
     <button type="submit">Обновить данные</button>
 </form>
 <hr>
 
 
 <p><strong>Просмотреть всех работников</strong></p>
-<p><button id="getAll" onclick="getAll()" type="button">Показать всё</button></p>
-<p><table id="table" style="display: none">
+<p>
+    <button id="getAll" onclick="getAll()" type="button">Показать всё</button>
+</p>
+<p>
+<table id="table" style="display: none">
     <thead>
     <tr>
         <th>Уникальный номер</th>
@@ -125,7 +141,8 @@
     <tbody>
 
     </tbody>
-</table></p>
+</table>
+</p>
 <hr>
 
 

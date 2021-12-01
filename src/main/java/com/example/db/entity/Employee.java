@@ -42,6 +42,4 @@ public class Employee {
     @OneToOne
     @JoinColumn(name = "position_id")
     private Position position;
-
-    private Integer hours;
 }

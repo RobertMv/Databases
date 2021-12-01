@@ -2,7 +2,6 @@ package com.example.db.controller;
 
 import com.example.db.converter.DtoEntityMapping;
 import com.example.db.dto.RestaurantDto;
-import com.example.db.entity.Restaurant;
 import com.example.db.service.impl.RestaurantsServiceImpl;
 import org.springframework.web.bind.annotation.*;
 

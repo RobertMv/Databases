@@ -13,6 +13,9 @@ function loadEmployees() {
             fillOptions(request.response, "employees");
             fillOptions(request.response, "employees_update");
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     request.send();
 }
@@ -65,6 +68,9 @@ function add() {
         if (request.readyState === 4 && request.status === 200) {
             alert("Ресторан успешно сохранен");
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     console.log(employee);
     request.send(employee);
@@ -81,6 +87,9 @@ function getAll() {
             alert("Все данные успешно получены");
             document.getElementById("table").style.display = "block";
             fillTable(request.response, "table");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();
@@ -100,16 +109,16 @@ function fillTable(jsonData, tableId) {
 
         Object.values(row).forEach((cell) => {
             const td = document.createElement("td");
-            if (Object.keys(row)[i] === "employees"){
+            if (Object.keys(row)[i] === "employees") {
                 console.log("HERE");
                 let select = document.createElement('select');
 
                 let array = row.employees.toString().split(',');
                 console.log(array.length);
 
-                for(let i = 0; i <= array.length-4; i+=4){
+                for (let i = 0; i <= array.length - 4; i += 4) {
                     let option = document.createElement('option');
-                    option.text = array[i] + " " + array[i+1] + " " + array[i+2] + " " + array[i+3];
+                    option.text = array[i] + " " + array[i + 1] + " " + array[i + 2] + " " + array[i + 3];
                     select.add(option);
                 }
 
@@ -118,10 +127,11 @@ function fillTable(jsonData, tableId) {
             } else {
                 td.textContent = cell;
                 tr.appendChild(td);
-            }i++;
+            }
+            i++;
         });
         table.appendChild(tr);
-        i=0;
+        i = 0;
     });
 }
 
@@ -174,6 +184,9 @@ function find() {
             lastFound = request.response;
             fillTable(jsonData, "found-table");
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     request.send();
 }
@@ -205,6 +218,9 @@ function update() {
         if (request.readyState === 4 && request.status === 200) {
             alert("Ресторан успешно обновлён");
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     console.log(employee);
     request.send(employee);
@@ -234,6 +250,9 @@ function deleteById() {
             alert("Ресторан успешно удалён");
             document.getElementById("delete_by_id").value = "";
         }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
+        }
     });
     request.send();
 }
@@ -247,6 +266,9 @@ function deleteAll() {
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
             alert("Все рестораны успешно удалены");
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            alert(request.response.message);
         }
     });
     request.send();

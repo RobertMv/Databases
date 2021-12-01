@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Блюда и меню</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="style.css" rel="stylesheet">
     <script src="js/dishes.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
 <form method="get">
     <p><strong>Добавление блюда</strong></p>
-    <p><input id="name" type="text" maxlength="50" placeholder="Название" size="25"></p>
-    <p><textarea id="about" cols="25" placeholder="Описание" rows="5"></textarea></p>
-    <p><input id="seasonal" type="checkbox" size="25"> <label for="seasonal">Сезонное блюдо</label></p>
-    <p><select id="products" multiple>Выберите продукты</select></p>
+    <p><input id="name" maxlength="50" placeholder="Название" required size="25" type="text"></p>
+    <p><textarea cols="25" id="about" placeholder="Описание" rows="5"></textarea></p>
+    <p><input id="seasonal" size="25" type="checkbox"> <label for="seasonal">Сезонное блюдо</label></p>
+    <p><select id="products" multiple required>Выберите продукты</select></p>
     <button onclick="add()" type="reset">Добавить блюдо</button>
 </form>
 <hr>
@@ -31,21 +31,25 @@
     </p>
     <p><input id="find-by-name" maxlength="50" placeholder="Название" size="25" style="display: none">
         <input id="find-by-id" maxlength="20" placeholder="Уникальный номер" size="25" style="display: none"></p>
-    <p><button onclick="find()" type="button">Найти</button></p>
-    <p><table id="found-table" style="display: none">
-    <thead>
-    <tr>
-        <th>Уникальный номер</th>
-        <th>Название</th>
-        <th>Описание</th>
-        <th>Сезонность</th>
-        <th>Список продуктов</th>
-    </tr>
-    </thead>
-    <tbody>
+    <p>
+        <button onclick="find()" type="button">Найти</button>
+    </p>
+    <p>
+    <table id="found-table" style="display: none">
+        <thead>
+        <tr>
+            <th>Уникальный номер</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Сезонность</th>
+            <th>Список продуктов</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    </tbody>
-</table></p>
+        </tbody>
+    </table>
+    </p>
 </form>
 <hr>
 
@@ -53,17 +57,22 @@
 <p><strong>Обновить данные</strong></p>
 <p>Чтобы обновить данные блюда - найдите его и нажмите кнопку "Изменить" ниже</p>
 <button onclick="readyForUpdate()" type="button">Изменить</button>
-<p><input id="name_update" maxlength="50" type="text" placeholder="Название" size="25" style="display: none"></p>
-<p><textarea id="about_update" cols="25" placeholder="Описание" rows="5" style="display: none"></textarea></p>
-<p><input id="seasonal_update" type="checkbox" size="25" style="display: none"> <label id="checkboxLabel" for="seasonal" style="display: none">Сезонное блюдо</label></p>
+<p><input id="name_update" maxlength="50" placeholder="Название" size="25" style="display: none" type="text"></p>
+<p><textarea cols="25" id="about_update" placeholder="Описание" rows="5" style="display: none"></textarea></p>
+<p><input id="seasonal_update" size="25" style="display: none" type="checkbox"> <label for="seasonal" id="checkboxLabel"
+                                                                                       style="display: none">Сезонное
+    блюдо</label></p>
 <p><select id="products_update" multiple style="display: none">Выберите продукты</select></p>
-<button id="update" onclick="update()" type="reset" style="display: none">Обновить данные</button>
+<button id="update" onclick="update()" style="display: none" type="reset">Обновить данные</button>
 <hr>
 
 
 <p><strong>Просмотреть все блюда</strong></p>
-<p><button id="getProducts" onclick="getAll()" type="button">Показать всё</button></p>
-<p><table id="table" style="display: none">
+<p>
+    <button id="getProducts" onclick="getAll()" type="button">Показать всё</button>
+</p>
+<p>
+<table id="table" style="display: none">
     <thead>
     <tr>
         <th>Уникальный номер</th>
@@ -76,7 +85,8 @@
     <tbody>
 
     </tbody>
-</table></p>
+</table>
+</p>
 <hr>
 
 

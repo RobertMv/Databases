@@ -18,6 +18,8 @@ public interface DishesRepository extends JpaRepository<Dish, Long> {
 
     List<Dish> findDishesBySeasonalTrue();
 
+    Optional<Dish> findDishByRequiredProductsIsContaining(String product);
+
     void deleteAll();
 
     void deleteById(Long id);
