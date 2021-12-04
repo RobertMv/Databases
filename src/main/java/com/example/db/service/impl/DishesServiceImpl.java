@@ -1,7 +1,5 @@
 package com.example.db.service.impl;
 
-import com.example.db.converter.DtoEntityMapping;
-import com.example.db.dto.DishDto;
 import com.example.db.entity.Dish;
 import com.example.db.exception.*;
 import com.example.db.repository.DishesRepository;
@@ -10,7 +8,6 @@ import com.example.db.service.DishesService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class DishesServiceImpl implements DishesService {

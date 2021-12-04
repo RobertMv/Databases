@@ -25,7 +25,10 @@ public class DishesController {
 
     @GetMapping("/all")
     public List<DishDto> getDishes() {
-        return dishesService.getAll().stream().map(dtoEntityMapping::convert).collect(Collectors.toList());
+        return dishesService.getAll()
+                .stream()
+                .map(dtoEntityMapping::convert)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/name/{name}")
@@ -40,7 +43,10 @@ public class DishesController {
 
     @GetMapping("/seasonal")
     public List<DishDto> getSeasonalDishes() {
-        return dishesService.getSeasonalDishes().stream().map(dtoEntityMapping::convert).collect(Collectors.toList());
+        return dishesService.getSeasonalDishes()
+                .stream()
+                .map(dtoEntityMapping::convert)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/save")
