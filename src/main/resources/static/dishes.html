@@ -11,9 +11,13 @@
 <form method="get">
     <p><strong>Добавление блюда</strong></p>
     <p><input id="name" maxlength="50" placeholder="Название" required size="25" type="text"></p>
+    <p><input id="price" maxlength="5" placeholder="Цена" required size="25" type="number"></p>
     <p><textarea cols="25" id="about" placeholder="Описание" rows="5"></textarea></p>
     <p><input id="seasonal" size="25" type="checkbox"> <label for="seasonal">Сезонное блюдо</label></p>
-    <p><select id="products" multiple required>Выберите продукты</select></p>
+    <p>
+        <p><label for="products">Выберите продукты (для множественного выбора удерживайте зажатой клавишу 'Ctrl')</label></p>
+        <select id="products" multiple required></select>
+    </p>
     <button onclick="add()" type="reset">Добавить блюдо</button>
 </form>
 <hr>
@@ -27,10 +31,13 @@
             <option value="1">Уникальному номеру</option>
             <option value="2">Названию</option>
             <option value="3">Сезонности</option>
+            <option value="4">Продукту</option>
         </select>
     </p>
-    <p><input id="find-by-name" maxlength="50" placeholder="Название" size="25" style="display: none">
-        <input id="find-by-id" maxlength="20" placeholder="Уникальный номер" size="25" style="display: none"></p>
+    <p><input id="find-by-name" required maxlength="50" placeholder="Название" size="25" style="display: none">
+        <input id="find-by-id" required maxlength="20" placeholder="Уникальный номер" size="25" style="display: none">
+        <select id="productForSearching" required style="display: none">Выберите продукты</select>
+    </p>
     <p>
         <button onclick="find()" type="button">Найти</button>
     </p>
@@ -40,6 +47,7 @@
         <tr>
             <th>Уникальный номер</th>
             <th>Название</th>
+            <th>Цена</th>
             <th>Описание</th>
             <th>Сезонность</th>
             <th>Список продуктов</th>
@@ -58,6 +66,7 @@
 <p>Чтобы обновить данные блюда - найдите его и нажмите кнопку "Изменить" ниже</p>
 <button onclick="readyForUpdate()" type="button">Изменить</button>
 <p><input id="name_update" maxlength="50" placeholder="Название" size="25" style="display: none" type="text"></p>
+<p><input id="price_update" maxlength="5" placeholder="Цена" required size="25" type="number"></p>
 <p><textarea cols="25" id="about_update" placeholder="Описание" rows="5" style="display: none"></textarea></p>
 <p><input id="seasonal_update" size="25" style="display: none" type="checkbox"> <label for="seasonal" id="checkboxLabel"
                                                                                        style="display: none">Сезонное
@@ -77,6 +86,7 @@
     <tr>
         <th>Уникальный номер</th>
         <th>Название</th>
+        <th>Цена</th>
         <th>Описание</th>
         <th>Сезонность</th>
         <th>Список продуктов</th>

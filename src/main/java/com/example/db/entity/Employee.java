@@ -39,7 +39,7 @@ public class Employee {
     @Column(unique = true)
     private String phone;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "position_id")
     private Position position;
 }

@@ -3,6 +3,7 @@ package com.example.db.dto;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class DishDto {
@@ -11,11 +12,11 @@ public class DishDto {
 
     private String name;
 
+    private Integer price;
+
     private String about;
 
     private boolean seasonal;
 
-    private List<String> requiredProducts;
-
-    private Integer price;
+    private Set<String> requiredProducts;
 }

@@ -1,6 +1,8 @@
 package com.example.db.service;
 
+import com.example.db.dto.DishDto;
 import com.example.db.entity.Dish;
+import com.example.db.entity.Product;
 import com.example.db.exception.NoDishFoundException;
 
 import java.util.List;
@@ -20,5 +22,7 @@ public interface DishesService {
 
     void deleteSeasonal();
 
-    Dish getById(Long id) throws NoDishFoundException;
+    Dish getById(Long id);
+
+    List<Dish> getDishByProduct(String productName);
 }

@@ -1,23 +1,26 @@
 package com.example.db.service.impl;
 
+import com.example.db.converter.DtoEntityMapping;
+import com.example.db.dto.DishDto;
 import com.example.db.entity.Dish;
-import com.example.db.exception.DishesEmptyException;
-import com.example.db.exception.NoDishDeletedException;
-import com.example.db.exception.NoDishFoundException;
-import com.example.db.exception.WrongInputException;
+import com.example.db.exception.*;
 import com.example.db.repository.DishesRepository;
+import com.example.db.repository.ProductsRepository;
 import com.example.db.service.DishesService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DishesServiceImpl implements DishesService {
 
     private final DishesRepository dishesRepository;
+    private final ProductsRepository productsRepository;
 
-    public DishesServiceImpl(DishesRepository dishesRepository) {
+    public DishesServiceImpl(DishesRepository dishesRepository, ProductsRepository productsRepository) {
         this.dishesRepository = dishesRepository;
+        this.productsRepository = productsRepository;
     }
 
     @Override
@@ -83,5 +86,16 @@ public class DishesServiceImpl implements DishesService {
     public Dish getById(Long id) {
         return dishesRepository.findDishById(id)
                 .orElseThrow(NoDishFoundException::new);
+    }
+
+    @Override
+    public List<Dish> getDishByProduct(String productName) {
+        try {
+            return dishesRepository.findDishByRequiredProductsIsContaining(
+                    productsRepository.findByName(productName)
+                            .orElseThrow(NoProductFoundException::new));
+        } catch (Exception e) {
+            throw new NoDishFoundException();
+        }
     }
 }

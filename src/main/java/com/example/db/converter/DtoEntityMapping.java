@@ -15,6 +15,7 @@ import com.example.db.service.ProductsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,11 +60,11 @@ public class DtoEntityMapping {
         return dish;
     }
 
-    private List<Product> getProductsByName(List<String> names) {
+    private Set<Product> getProductsByName(Set<String> names) {
         return names
                 .stream()
                 .map(productsService::getProductByName)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public DishDto convert(Dish dish) {
@@ -77,11 +78,11 @@ public class DtoEntityMapping {
         return dishDto;
     }
 
-    private List<String> getProducts(Dish dish) {
+    private Set<String> getProducts(Dish dish) {
         return dish.getRequiredProducts()
                 .stream()
                 .map(Product::getName)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public Employee convert(EmployeeDto employeeDto) {

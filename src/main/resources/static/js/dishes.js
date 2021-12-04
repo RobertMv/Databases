@@ -11,6 +11,7 @@ function loadProducts() {
         if (request.readyState === 4 && request.status === 200) {
             fillOptions(request.response, "products");
             fillOptions(request.response, "products_update");
+            fillOptions(request.response, "productForSearching");
         }
         if (request.readyState === 4 && request.status !== 200) {
             alert(request.response.message);
@@ -24,7 +25,6 @@ function fillOptions(jsonData, id) {
     productsSelector.length = 0;
 
     let defaultOption = document.createElement('option');
-    defaultOption.text = 'Выберите продукты зажимая \'Ctrl\'';
 
     productsSelector.add(defaultOption);
 
@@ -42,6 +42,7 @@ function add() {
     let request = new XMLHttpRequest();
     let about = document.getElementById("about").value;
     let name = document.getElementById("name").value;
+    let price = document.getElementById("price").value;
     let seasonal = document.getElementById("seasonal").checked;
     let products = [];
     for (let option of document.getElementById("products").options) {
@@ -53,6 +54,7 @@ function add() {
     let dish = JSON.stringify({
         "about": about,
         "name": name,
+        "price": price,
         "seasonal": seasonal,
         "requiredProducts": products
     });
@@ -116,14 +118,27 @@ function selectorChanged(selected) {
         case "0":
             document.getElementById("find-by-name").style.display = 'none';
             document.getElementById("find-by-id").style.display = 'none';
+            document.getElementById("productForSearching").style.display = 'none';
             break;
         case "1":
             document.getElementById("find-by-name").style.display = 'none';
             document.getElementById("find-by-id").style.display = 'block';
+            document.getElementById("productForSearching").style.display = 'none';
             break;
         case "2":
             document.getElementById("find-by-name").style.display = 'block';
             document.getElementById("find-by-id").style.display = 'none';
+            document.getElementById("productForSearching").style.display = 'none';
+            break;
+        case "3":
+            document.getElementById("find-by-name").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'none';
+            document.getElementById("productForSearching").style.display = 'none';
+            break;
+        case "4":
+            document.getElementById("find-by-name").style.display = 'none';
+            document.getElementById("find-by-id").style.display = 'none';
+            document.getElementById("productForSearching").style.display = 'block';
             break;
     }
 }
@@ -143,6 +158,10 @@ function find() {
         case "3":
             url = "/dishes/seasonal";
             break;
+        case "4":
+            let productName = document.getElementById("productForSearching").value;
+            url = "/dishes/find-by-product/" + productName;
+            break;
     }
     let request = new XMLHttpRequest();
     request.open("GET", url);
@@ -153,9 +172,11 @@ function find() {
             document.getElementById("found-table").style.display = "block";
             let jsonData = [];
             jsonData.push(request.response);
-            console.log(jsonData);
             lastFound = request.response;
-            fillTable(jsonData, "found-table");
+            if (request.response.length !== undefined)
+                fillTable(request.response, "found-table");
+            else
+                fillTable(jsonData, "found-table");
         }
         if (request.readyState === 4 && request.status !== 200) {
             alert(request.response.message);
@@ -166,11 +187,12 @@ function find() {
 
 function update() {
     let request = new XMLHttpRequest();
-    let about = document.getElementById("about").value;
-    let name = document.getElementById("name").value;
-    let seasonal = document.getElementById("seasonal").checked;
+    let about = document.getElementById("about_update").value;
+    let name = document.getElementById("name_update").value;
+    let price = document.getElementById("price_update").value;
+    let seasonal = document.getElementById("seasonal_update").checked;
     let products = [];
-    for (let option of document.getElementById("products").options) {
+    for (let option of document.getElementById("products_update").options) {
         if (option.selected) {
             products.push(option.value);
         }
@@ -180,6 +202,7 @@ function update() {
         "id": lastFound.id,
         "about": about,
         "name": name,
+        "price": price,
         "seasonal": seasonal,
         "requiredProducts": products
     });

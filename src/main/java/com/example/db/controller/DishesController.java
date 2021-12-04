@@ -62,4 +62,12 @@ public class DishesController {
     public void deleteById(@PathVariable Long id) {
         dishesService.deleteById(id);
     }
+
+    @GetMapping("/find-by-product/{productName}")
+    public List<DishDto> getDishesByProduct(@PathVariable String productName){
+        return dishesService.getDishByProduct(productName)
+                .stream()
+                .map(dtoEntityMapping::convert)
+                .collect(Collectors.toList());
+    }
 }

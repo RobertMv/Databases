@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,12 +21,13 @@ public class Dish {
     private String name;
 
     @Column(nullable = false)
+    private Integer price;
+
+    @Column(nullable = false)
     private String about;
 
     private boolean seasonal;
 
     @ManyToMany
-    private List<Product> requiredProducts;
-
-    private Integer price;
+    private Set<Product> requiredProducts;
 }
