@@ -17,21 +17,16 @@ public class Restaurant {
     @Column(name = "restaurant_id")
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @Column(nullable = false)
     private String address;
 
-    private Double monthProfit;
+    private Long monthProfit;
 
-    private Double yearProfit;
+    private Long yearProfit;
 
     @OneToMany
     private List<Employee> employees;
-
-//    @ElementCollection
-//    @CollectionTable(name = "product_weight_mapping", joinColumns = {@JoinColumn(name = "restaurant_id", referencedColumnName = "id")})
-//    @MapKeyColumn(name = "product_name")
-//    @Column(name = "weight")
-//    private Map<Product, Double> leftProducts;
-
-    @OneToMany
-    private List<Dish> menu;
 }

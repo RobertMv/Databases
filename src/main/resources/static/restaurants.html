@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Рестораны сети</title>
+    <link href="employees.css" rel="stylesheet">
+    <script src="js/restaurants.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<form onsubmit="add()">
+    <p><strong>Добавление ресторана</strong></p>
+    <p><input id="name" maxlength="50" placeholder="Название ресторана" required size="25" type="text"></p>
+    <p><label>Адрес ресторана </label><input id="address" maxlength="50" placeholder="прим.: г. Казань, ул. Проспект Победы 91"
+                                             required size="25" type="text">
+    </p>
+    <p><label>Прибыль за прошлый месяц (руб.) </label><input id="monthProfit" placeholder="прим.: 1244353" required
+                                                             size="25" type="number"><label>.00 рублей</label></p>
+    <p><label>Прибыль за прошлый год (руб.)</label><input id="yearProfit" placeholder="прим.: 9999353" required
+                                                          size="25" type="number"><label>.00 рублей</label></p>
+    <p><select id="employees" multiple>Выберите работников</select></p>
+    <button type="submit">Добавить ресторан</button>
+</form>
+<hr>
+
+
+<form>
+    <p><strong>Поиск ресторана по</strong></p>
+    <p>
+        <select id="selector" onchange="selectorChanged(this)">
+            <option disabled value="0">Выберите опцию</option>
+            <option value="1">Уникальному номеру</option>
+            <option value="2">Названию</option>
+            <option value="3">Самой низкой прибыли за прошлый месяц</option>
+            <option value="4">Самой низкой прибыли за прошлый год</option>
+        </select>
+    </p>
+    <p>
+        <input id="find-by-id" maxlength="50" placeholder="Уникальный номер" size="25" style="display: none">
+        <input id="find-by-name" maxlength="10" placeholder="Название" size="25" style="display: none">
+    </p>
+    <p>
+        <button onclick="find()" type="button">Найти</button>
+    </p>
+    <p>
+    <table id="found-table" style="display: none">
+        <thead>
+        <tr>
+            <th>Уникальный номер</th>
+            <th>Название</th>
+            <th>Адрес</th>
+            <th>Прибыль (месяц)</th>
+            <th>Прибыль (год)</th>
+            <th>Работники</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    </p>
+</form>
+<hr>
+
+
+<p><strong>Обновить данные</strong></p>
+<p>Чтобы обновить данные ресторана - найдите его и нажмите кнопку "Изменить" ниже</p>
+<p>
+    <button onclick="readyForUpdate()" type="button">Изменить</button>
+</p>
+<form id="update_form" onsubmit="update()" style="display: none">
+    <p><input id="name_update" maxlength="50" placeholder="Название ресторана" required size="25" type="text"></p>
+    <p><label>Адрес ресторана </label><input id="address_update" maxlength="50" placeholder="прим.: г. Казань, ул. Проспект Победы 91"
+                                             required size="25" type="text">
+    </p>
+    <p><label>Прибыль за прошлый месяц (руб.) </label><input id="monthProfit_update" placeholder="прим.: 1244353"
+                                                             required size="25" type="number"><label>.00
+        рублей</label></p>
+    <p><label>Прибыль за прошлый год (руб.)</label><input id="yearProfit_update" placeholder="прим.: 9999353"
+                                                          required size="25" type="number"><label>.00
+        рублей</label></p>
+    <p><select id="employees_update" multiple>Выберите работников</select></p>
+    <button type="submit">Обновить данные</button>
+</form>
+<hr>
+
+
+<p><strong>Просмотреть все рестораны</strong></p>
+<p>
+    <button id="getAll" onclick="getAll()" type="button">Показать всё</button>
+</p>
+<p>
+<table id="table" style="display: none">
+    <thead>
+    <tr>
+        <th>Уникальный номер</th>
+        <th>Название</th>
+        <th>Адрес</th>
+        <th>Прибыль (месяц)</th>
+        <th>Прибыль (год)</th>
+        <th>Работники</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+</p>
+<hr>
+
+
+<p><strong>Удалить данные</strong></p>
+<p>Чтобы удалить ресторан - введите его уникальный номер, чтобы удалить все - нажмите кнопку "Удалить всё"</p>
+<p><input id="delete_by_id" maxlength="50" placeholder="Уникальный номер" size="25"></p>
+<button onclick="deleteById()" type="reset">Удалить ресторана</button>
+<button onclick="deleteAll()" type="button">Удалить всё</button>
+</body>
+</html>

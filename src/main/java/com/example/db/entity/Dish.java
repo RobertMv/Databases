@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,10 +16,17 @@ public class Dish {
     @Column(name = "dish_id")
     private Long id;
 
-    private boolean isSeasonal;
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    @OneToMany
-    private List<Product> requiredProducts;
+    @Column(nullable = false)
+    private Integer price;
 
+    @Column(nullable = false)
     private String about;
+
+    private boolean seasonal;
+
+    @ManyToMany
+    private Set<Product> requiredProducts;
 }
