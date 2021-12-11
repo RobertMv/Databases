@@ -165,7 +165,7 @@ function deleteById() {
 
 function deleteAll() {
     let request = new XMLHttpRequest();
-    const url = "/products/all";
+    const url = "/products/delete-all";
     request.open("DELETE", url);
     request.setRequestHeader("Content-type", "application/json");
     request.responseType = "json";
