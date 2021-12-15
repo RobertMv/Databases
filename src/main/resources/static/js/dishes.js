@@ -159,7 +159,8 @@ function find() {
             url = "/dishes/seasonal";
             break;
         case "4":
-            let productName = document.getElementById("productForSearching").value;
+            let select = document.getElementById("productForSearching");
+            let productName = select.options[select.selectedIndex].value;
             url = "/dishes/find-by-product/" + productName;
             break;
     }
@@ -172,11 +173,15 @@ function find() {
             document.getElementById("found-table").style.display = "block";
             let jsonData = [];
             jsonData.push(request.response);
-            lastFound = request.response;
-            if (request.response.length !== undefined)
+            if (request.response.length !== undefined){
+                lastFound = request.response[0];
                 fillTable(request.response, "found-table");
-            else
+            }
+            else{
+                lastFound = request.response;
                 fillTable(jsonData, "found-table");
+            }
+
         }
         if (request.readyState === 4 && request.status !== 200) {
             alert(request.response.message);
@@ -226,8 +231,10 @@ function readyForUpdate() {
         document.getElementById("about_update").style.display = "block";
         document.getElementById("name_update").style.display = "block";
         document.getElementById("seasonal_update").style.display = "block";
+        document.getElementById("seasonal_update").value = lastFound.seasonal;
         document.getElementById("products_update").style.display = "block";
         document.getElementById("checkboxLabel").style.display = "block";
+        document.getElementById("price_update").style.display = "block";
         document.getElementById("update").style.display = "block";
         document.getElementById("about_update").value = lastFound.about;
         document.getElementById("name_update").value = lastFound.name;
