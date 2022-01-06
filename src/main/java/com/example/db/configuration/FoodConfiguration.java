@@ -53,7 +53,6 @@ public class FoodConfiguration {
     }
 
     @Bean(name = "foodEntityManagerFactory")
-    @Primary
     public LocalContainerEntityManagerFactoryBean foodEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(foodDataSource())
