@@ -26,14 +26,6 @@ import java.util.Objects;
         entityManagerFactoryRef = "foodEntityManagerFactory",
         transactionManagerRef = "foodTransactionManager"
 )
-//@PropertySource({"classpath:application.properties"})
-//@EnableJpaRepositories(
-//        basePackages = {"com.example.db.entity.food",
-//        "com.example.db.repository.food",
-//        "com.example.db.service.food.impl"},
-//        entityManagerFactoryRef = "db2EntityManager",
-//        transactionManagerRef = "db2TransactionManager"
-//)
 public class FoodConfiguration {
 
     @Bean
@@ -66,47 +58,4 @@ public class FoodConfiguration {
         return new JpaTransactionManager(
                 Objects.requireNonNull(foodEntityManagerFactory.getObject()));
     }
-//    private final Environment env;
-//
-//    public FoodConfiguration(Environment env) {
-//        this.env = env;
-//    }
-//
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean db2EntityManager() {
-//        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-//        em.setDataSource(db2Datasource());
-//        em.setPackagesToScan("com.orioninc.springapp.entity.users",
-//                "com.orioninc.springapp.repository.users",
-//                "com.orioninc.springapp.service.users.Impl");
-//        em.setPersistenceUnitName("db2EntityManager");
-//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-//        em.setJpaVendorAdapter(vendorAdapter);
-//        Map<String, Object> properties = new HashMap<>();
-//        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
-//        properties.put("spring.jpa.database-platform", env.getProperty("spring.jpa.database-platform"));
-//        em.setJpaPropertyMap(properties);
-//        return em;
-//    }
-//
-//    @Bean
-//    @ConfigurationProperties(prefix = "db2")
-//    public DataSource db2Datasource() {
-//        return DataSourceBuilder.create().driverClassName(
-//                env.getProperty("spring.driver-class-name"))
-//                .url(env.getProperty("db2.url"))
-//                .username(env.getProperty("db2.username"))
-//                .password(env.getProperty("db2.password"))
-//                .build();
-//    }
-//
-//    @Bean
-//    public PlatformTransactionManager db2TransactionManager() {
-//
-//        JpaTransactionManager transactionManager
-//                = new JpaTransactionManager();
-//        transactionManager.setEntityManagerFactory(
-//                db2EntityManager().getObject());
-//        return transactionManager;
-//    }
 }
