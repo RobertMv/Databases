@@ -1,13 +1,13 @@
-package com.example.db.service.impl;
+package com.example.db.service.staff.impl;
 
 
-import com.example.db.entity.Restaurant;
+import com.example.db.entity.staff.Restaurant;
 import com.example.db.exception.NoRestaurantDeletedException;
 import com.example.db.exception.NoRestaurantFoundException;
 import com.example.db.exception.RestaurantsEmptyException;
 import com.example.db.exception.WrongInputException;
-import com.example.db.repository.RestaurantsRepository;
-import com.example.db.service.RestaurantsService;
+import com.example.db.repository.staff.RestaurantsRepository;
+import com.example.db.service.staff.RestaurantsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

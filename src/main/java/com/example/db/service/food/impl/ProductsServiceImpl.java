@@ -1,12 +1,12 @@
-package com.example.db.service.impl;
+package com.example.db.service.food.impl;
 
-import com.example.db.entity.Product;
+import com.example.db.entity.food.Product;
 import com.example.db.exception.NoProductDeletedException;
 import com.example.db.exception.NoProductFoundException;
 import com.example.db.exception.ProductsEmptyException;
 import com.example.db.exception.WrongInputException;
-import com.example.db.repository.ProductsRepository;
-import com.example.db.service.ProductsService;
+import com.example.db.repository.food.ProductsRepository;
+import com.example.db.service.food.ProductsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

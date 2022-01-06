@@ -1,6 +1,6 @@
-package com.example.db.repository;
+package com.example.db.repository.staff;
 
-import com.example.db.entity.Position;
+import com.example.db.entity.staff.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

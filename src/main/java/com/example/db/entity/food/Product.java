@@ -1,4 +1,4 @@
-package com.example.db.entity;
+package com.example.db.entity.food;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

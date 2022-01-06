@@ -1,12 +1,12 @@
-package com.example.db.service.impl;
+package com.example.db.service.staff.impl;
 
-import com.example.db.entity.Employee;
+import com.example.db.entity.staff.Employee;
 import com.example.db.exception.EmployeesEmptyException;
 import com.example.db.exception.NoEmployeeDeletedException;
 import com.example.db.exception.NoEmployeeFoundException;
 import com.example.db.exception.WrongInputException;
-import com.example.db.repository.EmployeesRepository;
-import com.example.db.service.EmployeesService;
+import com.example.db.repository.staff.EmployeesRepository;
+import com.example.db.service.staff.EmployeesService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

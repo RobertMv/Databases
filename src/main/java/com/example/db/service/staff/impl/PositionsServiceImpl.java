@@ -1,12 +1,12 @@
-package com.example.db.service.impl;
+package com.example.db.service.staff.impl;
 
-import com.example.db.entity.Position;
+import com.example.db.entity.staff.Position;
 import com.example.db.exception.NoPositionDeletedException;
 import com.example.db.exception.NoPositionFoundException;
 import com.example.db.exception.PositionsEmptyException;
 import com.example.db.exception.WrongInputException;
-import com.example.db.repository.PositionsRepository;
-import com.example.db.service.PositionsService;
+import com.example.db.repository.staff.PositionsRepository;
+import com.example.db.service.staff.PositionsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

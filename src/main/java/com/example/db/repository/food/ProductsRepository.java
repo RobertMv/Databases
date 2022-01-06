@@ -1,6 +1,6 @@
-package com.example.db.repository;
+package com.example.db.repository.food;
 
-import com.example.db.entity.Product;
+import com.example.db.entity.food.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

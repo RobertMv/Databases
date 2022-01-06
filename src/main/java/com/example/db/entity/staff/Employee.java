@@ -1,4 +1,4 @@
-package com.example.db.entity;
+package com.example.db.entity.staff;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

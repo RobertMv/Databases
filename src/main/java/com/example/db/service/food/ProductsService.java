@@ -1,6 +1,6 @@
-package com.example.db.service;
+package com.example.db.service.food;
 
-import com.example.db.entity.Product;
+import com.example.db.entity.food.Product;
 
 import java.util.List;
 

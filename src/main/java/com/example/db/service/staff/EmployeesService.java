@@ -1,6 +1,6 @@
-package com.example.db.service;
+package com.example.db.service.staff;
 
-import com.example.db.entity.Employee;
+import com.example.db.entity.staff.Employee;
 
 import java.util.List;
 

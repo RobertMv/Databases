@@ -1,32 +1,32 @@
-package com.example.db.entity;
+package com.example.db.entity.staff;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
+@Table(name = "restaurants")
 @Entity
 @Data
 @NoArgsConstructor
-public class Dish {
+public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "dish_id")
+    @Column(name = "restaurant_id")
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
-    private Integer price;
+    private String address;
 
-    @Column(nullable = false)
-    private String about;
+    private Long monthProfit;
 
-    private boolean seasonal;
+    private Long yearProfit;
 
-    @ManyToMany
-    private Set<Product> requiredProducts;
+    @OneToMany
+    private List<Employee> employees;
 }

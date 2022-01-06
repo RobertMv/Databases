@@ -2,9 +2,9 @@ package com.example.db.controller;
 
 import com.example.db.converter.DtoEntityMapping;
 import com.example.db.dto.ProductDto;
-import com.example.db.entity.Product;
+import com.example.db.entity.food.Product;
 import com.example.db.exception.NoProductDeletedException;
-import com.example.db.service.ProductsService;
+import com.example.db.service.food.ProductsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

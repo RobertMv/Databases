@@ -1,7 +1,7 @@
 package com.example.db.controller;
 
-import com.example.db.entity.Position;
-import com.example.db.service.PositionsService;
+import com.example.db.entity.staff.Position;
+import com.example.db.service.staff.PositionsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

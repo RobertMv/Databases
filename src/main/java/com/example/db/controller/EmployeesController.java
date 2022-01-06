@@ -2,7 +2,7 @@ package com.example.db.controller;
 
 import com.example.db.converter.DtoEntityMapping;
 import com.example.db.dto.EmployeeDto;
-import com.example.db.service.impl.EmployeesServiceImpl;
+import com.example.db.service.staff.impl.EmployeesServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
