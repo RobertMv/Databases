@@ -33,23 +33,23 @@ public class StaffConfiguration {
     @Bean
     @Primary
     @ConfigurationProperties("spring.staff")
-    public DataSourceProperties staffDataSourceProperties(){
+    public DataSourceProperties staffDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Bean
     @Primary
     @ConfigurationProperties("spring.staff.configuration")
-    public DataSource staffDataSource(){
+    public DataSource staffDataSource() {
         return staffDataSourceProperties()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class)
                 .build();
     }
 
-    @Bean (name = "staffEntityManagerFactory")
+    @Bean(name = "staffEntityManagerFactory")
     @Primary
-    public LocalContainerEntityManagerFactoryBean staffEntityManagerFactory(EntityManagerFactoryBuilder builder){
+    public LocalContainerEntityManagerFactoryBean staffEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(staffDataSource())
                 .packages("com.example.db.entity.staff")

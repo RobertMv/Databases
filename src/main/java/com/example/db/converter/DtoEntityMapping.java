@@ -5,13 +5,13 @@ import com.example.db.dto.EmployeeDto;
 import com.example.db.dto.ProductDto;
 import com.example.db.dto.RestaurantDto;
 import com.example.db.entity.food.Dish;
-import com.example.db.entity.staff.Employee;
 import com.example.db.entity.food.Product;
+import com.example.db.entity.staff.Employee;
 import com.example.db.entity.staff.Restaurant;
 import com.example.db.repository.staff.PositionsRepository;
 import com.example.db.service.food.DishesService;
-import com.example.db.service.staff.EmployeesService;
 import com.example.db.service.food.ProductsService;
+import com.example.db.service.staff.EmployeesService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

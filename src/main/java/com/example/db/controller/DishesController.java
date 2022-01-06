@@ -70,7 +70,7 @@ public class DishesController {
     }
 
     @GetMapping("/find-by-product/{productName}")
-    public List<DishDto> getDishesByProduct(@PathVariable String productName){
+    public List<DishDto> getDishesByProduct(@PathVariable String productName) {
         return dishesService.getDishByProduct(productName)
                 .stream()
                 .map(dtoEntityMapping::convert)
