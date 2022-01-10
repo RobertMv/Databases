@@ -49,7 +49,6 @@ function add() {
     let employmentDate = document.getElementById("employmentDate").value;
     let phone = document.getElementById("phone").value;
     let position = document.getElementById("position").value;
-    let hours = document.getElementById("hours").value;
 
     const url = "/employees/save";
     let employee = JSON.stringify({
@@ -61,8 +60,7 @@ function add() {
         "passport": passport,
         "employmentDate": employmentDate,
         "phone": phone,
-        "position": position,
-        "hours": hours
+        "position": position
     });
 
     request.open("POST", url, true);
@@ -192,7 +190,6 @@ function update() {
     let employmentDate = document.getElementById("employmentDate_update").value;
     let phone = document.getElementById("phone_update").value;
     let position = document.getElementById("position_update").value;
-    let hours = document.getElementById("hours_update").value;
 
     const url = "/employees/save";
     let employee = JSON.stringify({
@@ -205,8 +202,7 @@ function update() {
         "passport": passport,
         "employmentDate": employmentDate,
         "phone": phone,
-        "position": position,
-        "hours": hours
+        "position": position
     });
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
@@ -237,7 +233,6 @@ function readyForUpdate() {
         document.getElementById("employmentDate_update").value = lastFound.employmentDate;
         document.getElementById("phone_update").value = lastFound.phone;
         document.getElementById("position_update").value = lastFound.position;
-        document.getElementById("hours_update").value = lastFound.hours;
     }
 }
 
